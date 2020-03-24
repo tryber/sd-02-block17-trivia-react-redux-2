@@ -8,7 +8,7 @@ class Home extends Component {
           Carreguei
         </p>
       </div>
-    )
+    );
   }
 }
 

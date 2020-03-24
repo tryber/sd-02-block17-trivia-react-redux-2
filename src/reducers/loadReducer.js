@@ -6,7 +6,7 @@ export default function reduce(state = initialState, action) {
     case types.LOAD_API:
       return state;
     case types.LOAD_USER:
-    return state;
+      return state;
     default:
       return state;
   }

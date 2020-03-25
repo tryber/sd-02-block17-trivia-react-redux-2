@@ -1,16 +1,41 @@
-import React from 'react';
-import logo from './trivia.png';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import propTypes from 'prop-types';
+import Loading from './components/Loading';
+import Home from './components/Home';
+import loadQuestions from './actions/loadAction';
 import './App.css';
 
-export default function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Iniciando
-        </p>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  componentDidMount() {
+    const { returnTravisAPI } = this.props;
+    returnTravisAPI();
+  }
+
+
+  render() {
+    const { load } = this.props;
+    if (!load) return (<Loading />);
+    return (
+      <div className="App">
+        <Home />
+      </div>
+    );
+  }
 }
+
+const mapStateToProps = ({ loadReducer: { load } }) => ({
+  load,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  returnTravisAPI: () => dispatch(loadQuestions()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+App.propTypes = {
+  load: propTypes.bool.isRequired,
+  returnTravisAPI: propTypes.func.isRequired,
+};

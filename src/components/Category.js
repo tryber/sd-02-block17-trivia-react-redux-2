@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { changeCategory } from '../actions/DataFilter';
+import { changeCategory } from '../actions/questionFilter';
 
 function QuestionCategory({ categories, changeSettings }) {
   return (
@@ -35,10 +35,10 @@ QuestionCategory.defaultProps = {
   categories: null,
 };
 
-const mapStateToProps = ({ Database: { categories } }) => ({ categories });
+// const mapStateToProps = ({ Database: { categories } }) => ({ categories });
 
 const mapDispatchToProps = (dispatch) => ({
   changeSettings: (callActions, value) => dispatch(callActions(value)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionCategory);
+export default connect(null, mapDispatchToProps)(QuestionCategory);

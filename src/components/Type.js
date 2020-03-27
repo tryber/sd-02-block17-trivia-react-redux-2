@@ -8,7 +8,7 @@ function QuestionType ({ changeSettings }) {
     <select
     name='type'
     data-testid='question-type-dropdown'
-    onChange={(x) => changeSettings(changeType, e.target.value)}
+    onChange={(x) => changeSettings(changeType, x.target.value)}
   >
     <option value='any'> Any Type</option>
     <option value='multiple'>Multiple Choice</option>

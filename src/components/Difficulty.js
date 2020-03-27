@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { changeDifficulty } from '../actions/DataFilter';
+import { changeDifficulty } from '../actions/questionFilter';
 
 function QuestionDifficulty({ changeSettings }) {
   return (

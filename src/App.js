@@ -10,7 +10,7 @@ class App extends Component {
 
   componentDidMount() {
     const { returnTravisAPI } = this.props;
-    const questions = 'api.php?amount=5'
+    const questions = 'api.php?amount=5';
     returnTravisAPI(questions);
   }
 

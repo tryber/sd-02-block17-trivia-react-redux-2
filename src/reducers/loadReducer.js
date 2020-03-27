@@ -13,7 +13,7 @@ function loadToken(state, action) {
   return {
     ...state,
     player: [
-      {token: action.token},
+      { token: action.token },
     ],
   };
 }

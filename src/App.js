@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import Loading from './components/Loading';
 import Home from './components/Home';
 import loadQuestions from './actions/loadAction';
+import loadToken from './actions/loadToken';
 import './App.css';
 
 class App extends Component {
@@ -15,7 +16,8 @@ class App extends Component {
 
 
   render() {
-    const { load } = this.props;
+    const { load, data } = this.props;
+    console.log(data)
     if (!load) return (<Loading />);
     return (
       <div className="App">
@@ -26,7 +28,7 @@ class App extends Component {
 }
 
 const mapStateToProps = ({ loadReducer: { load } }) => ({
-  load,
+  load
 });
 
 const mapDispatchToProps = (dispatch) => ({

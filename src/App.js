@@ -16,8 +16,7 @@ class App extends Component {
 
 
   render() {
-    const { load, data } = this.props;
-    console.log(data)
+    const { load } = this.props;
     if (!load) return (<Loading />);
     return (
       <div className="App">

@@ -3,7 +3,7 @@ import getTokenTriviaAPI from '../service/tokenAPI';
 
 function apiSucess(infos) {
   return {
-    type: types.LOAD_USER ,
+    type: types.LOAD_USER,
     token: infos,
   };
 }

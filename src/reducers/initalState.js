@@ -2,8 +2,8 @@ const initialState = {
   data: [],
   dataMock: [],
   player: [
-    {name: {} },
-    {token: ''},
+    { name: {} },
+    { token: '' },
   ],
   load: false,
   error: '',

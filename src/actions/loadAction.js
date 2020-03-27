@@ -16,9 +16,9 @@ function apiFailure(error) {
   };
 }
 
-const loadQuestions = () => (
+const loadQuestions = (question) => (
   (dispatch) => (
-    getEndPointTrivia()
+    getEndPointTrivia(question)
       .then(
         (infos) => dispatch(apiSucess(infos)),
         (error) => dispatch(apiFailure(error.message)),

@@ -4,14 +4,14 @@ import propTypes from 'prop-types';
 import Loading from './components/Loading';
 import Home from './components/Home';
 import loadQuestions from './actions/loadAction';
-import loadToken from './actions/loadToken';
 import './App.css';
 
 class App extends Component {
 
   componentDidMount() {
     const { returnTravisAPI } = this.props;
-    returnTravisAPI();
+    const questions = 'api.php?amount=5'
+    returnTravisAPI(questions);
   }
 
 
@@ -27,11 +27,11 @@ class App extends Component {
 }
 
 const mapStateToProps = ({ loadReducer: { load } }) => ({
-  load
+  load,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  returnTravisAPI: () => dispatch(loadQuestions()),
+  returnTravisAPI: (questions) => dispatch(loadQuestions(questions)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

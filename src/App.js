@@ -13,7 +13,6 @@ class App extends Component {
     returnTravisAPI();
   }
 
-
   render() {
     const { load } = this.props;
     if (!load) return (<Loading />);

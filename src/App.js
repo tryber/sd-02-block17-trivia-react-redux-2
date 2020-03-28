@@ -42,7 +42,12 @@ const mapDispatchToProps = (dispatch) => ({
 App.propTypes = {
   isLoading: propTypes.bool.isRequired,
   returnTriviaAPI: propTypes.func.isRequired,
-  player: propTypes.object.isRequired,
+  player: propTypes.shape({
+    name: propTypes.string.isRequired,
+    assertions: propTypes.number.isRequired,
+    score: propTypes.number.isRequired,
+    gravatarEmail: propTypes.string.isRequired,
+  }).isRequired,
   error: propTypes.string.isRequired,
 };
 

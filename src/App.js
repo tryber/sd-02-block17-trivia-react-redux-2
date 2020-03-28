@@ -9,8 +9,9 @@ import './App.css';
 class App extends Component {
 
   componentDidMount() {
-    const { returnTravisAPI } = this.props;
-    returnTravisAPI();
+    const { returnTriviaAPI } = this.props;
+    const questions = 'api.php?amount=5';
+    returnTriviaAPI(questions);
   }
 
 
@@ -30,12 +31,12 @@ const mapStateToProps = ({ loadReducer: { load } }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  returnTravisAPI: () => dispatch(loadQuestions()),
+  returnTriviaAPI: (questions) => dispatch(loadQuestions(questions)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 App.propTypes = {
   load: propTypes.bool.isRequired,
-  returnTravisAPI: propTypes.func.isRequired,
+  returnTriviaAPI: propTypes.func.isRequired,
 };

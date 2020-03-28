@@ -1,11 +1,10 @@
 import * as types from '../actions/actionTypes';
-import getEndPointTrivia from '../service/triviaAPI';
+import getTokenTriviaAPI from '../service/tokenAPI';
 
 function apiSucess(infos) {
   return {
-    type: types.LOAD_API,
-    data: infos,
-    dataMock: infos,
+    type: types.LOAD_USER,
+    token: infos,
   };
 }
 
@@ -16,9 +15,9 @@ function apiFailure(error) {
   };
 }
 
-const loadQuestions = (question) => (
+const loadQuestions = () => (
   (dispatch) => (
-    getEndPointTrivia(question)
+    getTokenTriviaAPI()
       .then(
         (infos) => dispatch(apiSucess(infos)),
         (error) => dispatch(apiFailure(error.message)),

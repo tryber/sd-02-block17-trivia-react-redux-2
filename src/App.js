@@ -39,9 +39,11 @@ const mapDispatchToProps = (dispatch) => ({
   returnTriviaAPI: (questions) => dispatch(loadQuestions(questions)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
-
 App.propTypes = {
   isLoading: propTypes.bool.isRequired,
   returnTriviaAPI: propTypes.func.isRequired,
+  player: propTypes.object.isRequired,
+  error: propTypes.string.isRequired,
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

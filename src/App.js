@@ -18,8 +18,9 @@ class App extends Component {
 
 
   render() {
-    const { isLoading } = this.props;
+    const { isLoading, error } = this.props;
     if (isLoading) return (<Loading />);
+    if (error) return (<div className="error">{error}</div>);
     return (
       <div className="App">
         <Home />
@@ -28,9 +29,10 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ loadReducer: { isLoading }, player }) => ({
+const mapStateToProps = ({ loadReducer: { isLoading, error }, player }) => ({
   isLoading,
   player,
+  error,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -40,6 +42,6 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 App.propTypes = {
-  load: propTypes.bool.isRequired,
+  isLoading: propTypes.bool.isRequired,
   returnTriviaAPI: propTypes.func.isRequired,
 };

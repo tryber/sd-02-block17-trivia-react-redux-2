@@ -5,7 +5,7 @@ const initialState = {
     { name: {} },
     { token: '' },
   ],
-  load: false,
+  isLoading: true,
   error: '',
 };
 

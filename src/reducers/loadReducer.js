@@ -6,6 +6,7 @@ function loadAPI(state, action) {
     ...state,
     data: action.data,
     dataMock: action.dataMock,
+    isLoading: false,
   };
 }
 

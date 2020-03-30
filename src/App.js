@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import Loading from './components/Loading';
 import Home from './components/Home';
+import QuestionsPage from './components/QuestionsPage';
 import loadQuestions from './actions/loadAction';
 import './App.css';
 
@@ -17,10 +18,11 @@ class App extends Component {
 
   render() {
     const { load } = this.props;
-    if (!load) return (<Loading />);
+    if (load) return (<Loading />);
     return (
       <div className="App">
-        <Home />
+        <QuestionsPage />
+        {/* <Home /> */}
       </div>
     );
   }

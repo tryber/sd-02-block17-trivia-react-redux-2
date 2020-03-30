@@ -1,7 +1,13 @@
 import * as types from '../actions/actionTypes';
 import getEndPointTrivia from '../service/triviaAPI';
 
-function apiSucess(infos) {
+function apiRequest() {
+  return {
+    type: types.REQUEST_API,
+  };
+}
+
+function apiSuccess(infos) {
   return {
     type: types.LOAD_API,
     data: infos,
@@ -17,13 +23,15 @@ function apiFailure(error) {
 }
 
 const loadQuestions = (question) => (
-  (dispatch) => (
-    getEndPointTrivia(question)
-      .then(
-        (infos) => dispatch(apiSucess(infos)),
+  (dispatch) => {
+    dispatch(apiRequest());
+    return (
+      getEndPointTrivia(question).then(
+        (infos) => dispatch(apiSuccess(infos)),
         (error) => dispatch(apiFailure(error.message)),
       )
-  )
+    );
+  }
 );
 
 export default loadQuestions;

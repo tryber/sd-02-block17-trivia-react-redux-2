@@ -22,7 +22,7 @@ class QuestionsPage extends Component {
     return (
       <div>
         <div>
-          {renderHeader}
+          {this.renderHeader()}
         </div>
         <div>
           Página

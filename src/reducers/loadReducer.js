@@ -32,11 +32,11 @@ function loadToken(state, action) {
 
 function loadCategory(state, action) {
   return {
-  ...state,
-  categoryLoad: action.categoryLoad,
-  categories: action.categories,
-  errorCategory: action.errorCategory,
- }
+    ...state,
+    categoryLoad: action.categoryLoad,
+    categories: action.categories,
+    errorCategory: action.errorCategory,
+ };
 }
 
 

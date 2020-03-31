@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
 import propTypes from 'prop-types';
+import { Redirect, Link } from 'react-router-dom';
 import changeUser from '../actions/userChangeAction';
 
 class Home extends Component {
@@ -22,7 +22,7 @@ class Home extends Component {
           <div className="config-button">
             <button data-testid="config-button" />
           </div>
-          </Link>
+        </Link>
         <div>
           <p>Email do Gravatar:</p>
           <input name="gravatarEmail" onChange={handleChange} data-testid="input-gravatar-email" />

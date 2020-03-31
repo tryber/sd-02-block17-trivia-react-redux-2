@@ -25,7 +25,7 @@ class App extends Component {
       localStorage.setItem('player', JSON.stringify(player));
     }
   }
- 
+
   render() {
     const { isLoading, error } = this.props;
     if (isLoading) return (<Loading />);

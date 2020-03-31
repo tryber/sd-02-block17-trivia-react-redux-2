@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Category from '../components/Category';
 import Type from '../components/Type';
 import Difficulty from '../components/Difficulty';
-import loadCategory from '../actions/loadCategory'
+import loadCategory from '../actions/loadCategory';
 import '../style/Settings.css';
 
 class Settings extends Component {
@@ -15,7 +15,7 @@ class Settings extends Component {
   componentDidMount() {
     const { returnCategoryName } = this.props;
     const categories = 'api_category.php';
-    returnCategoryName(categories)
+    returnCategoryName(categories);
   }
 
   render() {
@@ -39,12 +39,11 @@ class Settings extends Component {
         </div>
       );
     }
-    return (<div><Loading /></div>)
+    return (<div><Loading /></div>);
   }
     }
-    
 
-const mapStateToProps = ({ loadReducer: { categoryLoad, categories, errorCategory }}) => ({
+const mapStateToProps = ({ loadReducer: { categoryLoad, categories, errorCategory } }) => ({
   categoryLoad,
   categories,
   errorCategory,
@@ -54,8 +53,13 @@ const mapDispatchToProps = (dispatch) => ({
   returnCategoryName: (categories) => dispatch(loadCategory(categories)),
 });
 
-returnCategoryName.PropTypes = {
-  returnCategoryName: PropTypes.func.isRequired,
+// Settings.defaultProps = {
+//   categories: [],
+// };
+
+Settings.propTypes = {
+  returnCategoryName: propTypes.func.isRequired,
+  categories: propTypes.instanceOf(Object).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

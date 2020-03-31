@@ -5,3 +5,4 @@ export const LOAD_USER = 'LOAD_USER';
 export const LOAD_CATEGORY = 'LOAD_CATEGORY';
 
 export const CHANGE_USER_DATA = 'CHANGE_USER_DATA';
+export const CLEAR_USER_DATA = 'CLEAR_USER_DATA';

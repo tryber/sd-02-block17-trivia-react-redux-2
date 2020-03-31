@@ -36,7 +36,7 @@ function loadCategory(state, action) {
     categoryLoad: action.categoryLoad,
     categories: action.categories,
     errorCategory: action.errorCategory,
- };
+  };
 }
 
 

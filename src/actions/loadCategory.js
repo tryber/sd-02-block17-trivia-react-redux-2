@@ -16,13 +16,11 @@ function categoryFailure(errorCategory) {
   };
 }
 
-const loadCategory = (categories) => ((dispatch) => {
-  return (
-    getEndPointTrivia(categories).then(
-      (infos) => dispatch(categorySuccess(infos)),
-      (error) => dispatch(categoryFailure(error.message)),
-    )
-  );
-});
+const loadCategory = (categories) => ((dispatch) => (
+  getEndPointTrivia(categories).then(
+    (infos) => dispatch(categorySuccess(infos)),
+    (error) => dispatch(categoryFailure(error.message)),
+  )
+));
 
 export default loadCategory;

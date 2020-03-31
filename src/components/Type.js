@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { changeType } from '../actions/questionFilter';
 
-function QuestionType ({ changeSettings }) {
+function QuestionType({ changeSettings }) {
   return (
     <select
       name="type"

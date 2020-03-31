@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Loading from '../components/Loading';
-import PropTypes from 'prop-types';
 
 import Category from '../components/Category';
 import Type from '../components/Type';
@@ -58,8 +58,8 @@ const mapDispatchToProps = (dispatch) => ({
 // };
 
 Settings.propTypes = {
-  returnCategoryName: propTypes.func.isRequired,
-  categories: propTypes.instanceOf(Object).isRequired,
+  returnCategoryName: PropTypes.func.isRequired,
+  categories: PropTypes.instanceOf(Object),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

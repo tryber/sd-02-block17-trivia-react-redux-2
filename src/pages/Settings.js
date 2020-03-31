@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Loading from '../components/Loading';
+import PropTypes from 'prop-types';
 
 import Category from '../components/Category';
 import Type from '../components/Type';
@@ -18,9 +19,8 @@ class Settings extends Component {
   }
 
   render() {
-    const { categoryLoad, categories, errorCategory } = this.props;
+    const { categories } = this.props;
     if (categories !== undefined) {
-      console.log(categories)
       return (
         <div className="settings-container">
           <h1 className="title">Settings</h1>
@@ -33,9 +33,9 @@ class Settings extends Component {
           <div className="select">
             <Type />
           </div>
-          {/* <Link to="/">
+          <Link to="/">
             <button type="button" className="save-settings">Play with this settings</button>
-          </Link> */}
+          </Link>
         </div>
       );
     }
@@ -54,5 +54,8 @@ const mapDispatchToProps = (dispatch) => ({
   returnCategoryName: (categories) => dispatch(loadCategory(categories)),
 });
 
+returnCategoryName.PropTypes = {
+  returnCategoryName: PropTypes.func.isRequired,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps) (Settings);
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);

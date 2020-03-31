@@ -37,7 +37,7 @@ function loadCategory(state, action) {
   categories: action.categories,
   errorCategory: action.errorCategory,
  }
-}; 
+}
 
 
 export default function reducer(state = initialState, action) {

@@ -6,14 +6,14 @@ import { changeType } from '../actions/questionFilter';
 function QuestionType ({ changeSettings }) {
   return (
     <select
-    name='type'
-    data-testid='question-type-dropdown'
-    onChange={(x) => changeSettings(changeType, x.target.value)}
-  >
-    <option value='any'> Any Type</option>
-    <option value='multiple'>Multiple Choice</option>
-    <option value='boolean'>True/False</option>
-  </select>
+      name='type'
+      data-testid='question-type-dropdown'
+      onChange={(x) => changeSettings(changeType, x.target.value)}
+    >
+      <option value='any'> Any Type</option>
+      <option value='multiple'>Multiple Choice</option>
+      <option value='boolean'>True/False</option>
+    </select>
   );
 }
 

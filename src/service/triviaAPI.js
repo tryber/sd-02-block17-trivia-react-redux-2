@@ -1,5 +1,5 @@
-const getEndPointTrivia = () => (
-  fetch('https://opentdb.com/api.php?amount=5')
+const getEndPointTrivia = (link) => (
+  fetch(`https://opentdb.com/${link}`)
     .then((response) => (
       response
         .json()

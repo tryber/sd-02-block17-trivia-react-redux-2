@@ -9,13 +9,17 @@ import './App.css';
 class App extends Component {
 
   componentDidMount() {
-    const { returnTravisAPI } = this.props;
-    returnTravisAPI();
+    const { returnTriviaAPI, player } = this.props;
+    const questions = 'api.php?amount=5';
+    returnTriviaAPI(questions);
+
+    localStorage.setItem('player', JSON.stringify(player));
   }
 
   render() {
-    const { load } = this.props;
-    if (!load) return (<Loading />);
+    const { isLoading, error } = this.props;
+    if (isLoading) return (<Loading />);
+    if (error) return (<div className="error">{error}</div>);
     return (
       <div className="App">
         <Home />
@@ -24,17 +28,26 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ loadReducer: { load } }) => ({
-  load,
+const mapStateToProps = ({ loadReducer: { isLoading, error }, player }) => ({
+  isLoading,
+  player,
+  error,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  returnTravisAPI: () => dispatch(loadQuestions()),
+  returnTriviaAPI: (questions) => dispatch(loadQuestions(questions)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
-
 App.propTypes = {
-  load: propTypes.bool.isRequired,
-  returnTravisAPI: propTypes.func.isRequired,
+  isLoading: propTypes.bool.isRequired,
+  returnTriviaAPI: propTypes.func.isRequired,
+  player: propTypes.shape({
+    name: propTypes.string.isRequired,
+    assertions: propTypes.number.isRequired,
+    score: propTypes.number.isRequired,
+    gravatarEmail: propTypes.string.isRequired,
+  }).isRequired,
+  error: propTypes.string.isRequired,
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

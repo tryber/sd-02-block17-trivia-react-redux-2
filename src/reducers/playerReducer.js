@@ -13,6 +13,8 @@ const userReducer = (state = initialState, action) => {
       ...state,
       [action.name]: action.value,
     };
+  } else if (action.type === types.CLEAR_USER_DATA) {
+    return initialState;
   }
 
   return state;

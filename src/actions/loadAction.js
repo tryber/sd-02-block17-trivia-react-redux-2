@@ -9,9 +9,8 @@ function apiRequest() {
 
 function apiSuccess(infos) {
   return {
-    type: types.LOAD_API,
-    data: infos,
-    dataMock: infos,
+    type: types.LOAD_CATEGORY,
+    category: infos,
   };
 }
 

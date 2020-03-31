@@ -2,10 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import changeUser from '../actions/userChangeAction';
+import { Redirect } from 'react-router-dom';
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { shouldRedirect: false }
+  }
+
   render() {
     const { name, gravatarEmail, handleChange } = this.props;
+    const { shouldRedirect } = this.state;
+
+    if (shouldRedirect) return <Redirect to="/feedback" />;
+
     return (
       <div className="home">
         <div className="config-button">
@@ -24,6 +34,7 @@ class Home extends Component {
             disabled={(name && gravatarEmail) ? '' : 'disabled'}
             data-testid="btn-play"
             className="btn-play"
+            onClick={() => this.setState({ shouldRedirect: true })}
           >
             JOGAR!
           </button>

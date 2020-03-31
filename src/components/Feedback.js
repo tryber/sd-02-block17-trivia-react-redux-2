@@ -40,7 +40,7 @@ class Feedback extends Component {
   }
 
   renderSection() {
-    const { score, assertions} = this.props;
+    const { score, assertions } = this.props;
     const message = assertions < 3 ? 'Podia ser melhor...' : 'Mandou bem!';
 
     return (

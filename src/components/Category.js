@@ -35,10 +35,10 @@ QuestionCategory.defaultProps = {
   categories: null,
 };
 
-// const mapStateToProps = ({ Database: { categories } }) => ({ categories });
+const mapStateToProps = ({ loadReducer: { categories } }) => ({ categories });
 
 const mapDispatchToProps = (dispatch) => ({
   changeSettings: (callActions, value) => dispatch(callActions(value)),
 });
 
-export default connect(null, mapDispatchToProps)(QuestionCategory);
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionCategory);

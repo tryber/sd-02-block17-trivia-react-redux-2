@@ -34,9 +34,7 @@ function loadCategory(state, action) {
   return {
   ...state,
   categoryLoad: action.categoryLoad,
-  categories: [
-  action.categories,
-  ],
+  categories: action.categories,
   errorCategory: action.errorCategory,
  }
 }; 

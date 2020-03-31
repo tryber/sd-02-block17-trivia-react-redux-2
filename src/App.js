@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import Loading from './components/Loading';
-import Home from './components/Home';
-// import Settings from './pages/Settings';
+// import Home from './components/Home';
+import Settings from './pages/Settings';
 import loadQuestions from './actions/loadAction';
 import './App.css';
 
@@ -23,8 +23,8 @@ class App extends Component {
     if (error) return (<div className="error">{error}</div>);
     return (
       <div className="App">
-        <Home />
-        {/* <Settings /> */}
+        {/* <Home /> */}
+        <Settings />
       </div>
     );
   }

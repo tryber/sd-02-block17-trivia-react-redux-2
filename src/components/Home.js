@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import propTypes from 'prop-types';
 import changeUser from '../actions/userChangeAction';
-import { Redirect } from 'react-router-dom';
 
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { shouldRedirect: false }
+    this.state = { shouldRedirect: false };
   }
 
   render() {

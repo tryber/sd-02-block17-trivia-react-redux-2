@@ -12,9 +12,10 @@ import './App.css';
 class App extends Component {
 
   componentDidMount() {
-    const { returnTriviaAPI } = this.props;
+    const { returnTriviaAPI, player } = this.props;
     const questions = 'api.php?amount=5';
     returnTriviaAPI(questions);
+    localStorage.setItem('player', JSON.stringify(player));
   }
 
   componentDidUpdate(prevProps) {

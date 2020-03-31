@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import propTypes from 'prop-types';
 import imageLink from '../service/hashConverter';
 import playerCleanupAction from '../actions/playerCleanupAction';
 
@@ -27,19 +28,34 @@ class Feedback extends Component {
 
     return (
       <div>
-          <header>
-            <img src={imageLink(gravatarEmail)} />
+        <header>
+          <div className="header-left">
+            <div className="gravatar-image">
+              <img alt="gravatar" src={imageLink(gravatarEmail)} />
+            </div>
             <p data-testid="header-player-name">{`Jogador: ${name}`}</p>
+          </div>
+          <div className="header-right">
             <p data-testid="header-score">{`Pontos: ${score}`}</p>
             <div className="config-button">
               <button data-testid="config-button" />
             </div>
-          </header>
+          </div>
+        </header>
+        <section>
           <h1 data-testid="feedback-text">{message}</h1>
           <p data-testid="feedback-total-question">{`Você acertou ${assertions} questões!`}</p>
           <p data-testid="feedback-total-score">{`Um total de ${score} pontos`}</p>
-          <button onClick={() => this.setState({ shouldRedirectToRanking: true })}>VER RANKING</button>
-          <button onClick={this.restartGame}>JOGAR NOVAMENTE</button>
+          <div className="buttons">
+            <button
+              onClick={() => this.setState({ shouldRedirectToRanking: true })}
+              className="btn-ranking"
+            >
+              VER RANKING
+            </button>
+            <button onClick={this.restartGame} className="btn-play">JOGAR NOVAMENTE</button>
+          </div>
+        </section>
       </div>
     );
   }
@@ -55,5 +71,13 @@ const mapStateToProps = ({ player: { gravatarEmail, name, score, assertions } })
 const mapDispatchToProps = (dispatch) => ({
   clearPlayer: () => dispatch(playerCleanupAction()),
 });
+
+Feedback.propTypes = {
+    name: propTypes.string.isRequired,
+    gravatarEmail: propTypes.string.isRequired,
+    score: propTypes.number.isRequired,
+    assertions: propTypes.number.isRequired,
+    clearPlayer: propTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feedback);

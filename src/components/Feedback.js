@@ -93,8 +93,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Feedback.propTypes = {
-  name: propTypes.string.isRequired,
   gravatarEmail: propTypes.string.isRequired,
+  name: propTypes.string.isRequired,
   score: propTypes.number.isRequired,
   assertions: propTypes.number.isRequired,
   clearPlayer: propTypes.func.isRequired,

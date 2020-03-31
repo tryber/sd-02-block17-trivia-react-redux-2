@@ -30,6 +30,18 @@ function loadToken(state, action) {
   };
 }
 
+function loadCategory(state, action) {
+  return {
+  ...state,
+  categoryLoad: action.categoryLoad,
+  categories: [
+  action.categories,
+  ],
+  errorCategory: action.errorCategory,
+ }
+}; 
+
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case types.REQUEST_API:
@@ -40,6 +52,8 @@ export default function reducer(state = initialState, action) {
       return loadToken(state, action);
     case types.FAIL_API:
       return { ...state, isLoading: false, error: action.error };
+    case types.LOAD_CATEGORIES:
+      return loadCategory(state, action);
     default:
       return state;
   }

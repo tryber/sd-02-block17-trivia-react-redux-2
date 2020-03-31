@@ -59,7 +59,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 Settings.propTypes = {
   returnCategoryName: PropTypes.func.isRequired,
-  categories: PropTypes.instanceOf(Object),
+  categories: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

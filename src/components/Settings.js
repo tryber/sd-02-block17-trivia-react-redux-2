@@ -109,7 +109,7 @@ Settings.propTypes = {
   returnCategoryName: PropTypes.func.isRequired,
   categories: PropTypes.instanceOf(Object).isRequired,
   changeSettings: PropTypes.func.isRequired,
-  categoryLoad: PropTypes.bool.isRequired,
+  categoryLoad: PropTypes.bool,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Loading from './Loading';
 import loadCategory from '../actions/loadCategory';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 import '../components/style/Settings.css';
 
@@ -67,7 +67,7 @@ class Settings extends Component {
 
   render() {
     const { categories, categoryLoad } = this.props;
-    if (!categoryLoad) return (<div><Loading /></div>)
+    if (!categoryLoad) return (<div><Loading /></div>);
     if (categories !== undefined) {
       return (
         <div className="settings-container">
@@ -109,6 +109,7 @@ Settings.propTypes = {
   returnCategoryName: PropTypes.func.isRequired,
   categories: PropTypes.instanceOf(Object).isRequired,
   changeSettings: PropTypes.func.isRequired,
+  categoryLoad: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

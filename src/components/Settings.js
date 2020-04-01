@@ -66,7 +66,7 @@ class Settings extends Component {
   }
 
   render() {
-    const { categories, categoryLoad, errorCategory } = this.props;
+    const { categories, categoryLoad } = this.props;
     if (!categoryLoad) return (<div><Loading /></div>)
     if (categories !== undefined) {
       return (
@@ -87,14 +87,13 @@ class Settings extends Component {
         </div>
       );
     }
-    return (<div>{errorCategory}</div>);
+    return (<div>Nothing found</div>);
   }
     }
 
-const mapStateToProps = ({ loadReducer: { categoryLoad, categories, errorCategory } }) => ({
+const mapStateToProps = ({ loadReducer: { categoryLoad, categories } }) => ({
   categoryLoad,
   categories,
-  errorCategory,
 });
 
 const mapDispatchToProps = (dispatch) => ({

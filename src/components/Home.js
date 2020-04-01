@@ -1,9 +1,9 @@
+import { Redirect, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import changeUser from '../actions/userChangeAction';
 import loadQuestions from '../actions/loadAction';
-import { Redirect, Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import './style/Home.css';
 
 class Home extends Component {

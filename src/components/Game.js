@@ -17,6 +17,17 @@ class Game extends Component {
     )
   }
 
+  renderGame() {
+    return (
+      <div>
+        <div>
+          Titulo Pergunta
+          <p>Pergunta</p>
+        </div>
+      </div>
+    )
+  }
+
   render() {
     return (
       <div className="container-questions">
@@ -24,7 +35,7 @@ class Game extends Component {
           {this.renderHeader()}
         </div>
         <div className="container-page">
-          Página
+          {this.renderGame()}
         </div>
       </div>
     )

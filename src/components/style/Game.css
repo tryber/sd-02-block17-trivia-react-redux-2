@@ -10,7 +10,7 @@ header div {
 }
 
 header {
-  background-color: rgb( 196 , 196 , 196 );
+  background-color: rgb(196 ,196 ,196);
   display: flex;
   font-size: 30px;
   justify-content: space-between;

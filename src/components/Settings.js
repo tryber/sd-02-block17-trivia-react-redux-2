@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Loading from './Loading';
+import Type from './pages/Type';
+import loadCategory from '../actions/loadCategory';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Loading from './Loading';
+import { changeCategory } from '../actions/questionFilter';
+import { changeDifficulty } from '../actions/questionFilter';
 
-import Category from './pages/Category';
-import Type from './pages/Type';
-import Difficulty from './pages/Difficulty';
-import loadCategory from '../actions/loadCategory';
 import '../components/style/Settings.css';
 
 class Settings extends Component {
@@ -18,20 +18,71 @@ class Settings extends Component {
     returnCategoryName(categories);
   }
 
+  questionCategory(categories) {
+    const { changeSettings } = this.props;
+    return (
+      <select
+        name="category"
+        data-testid="question-category-dropdown"
+        onChange={(e) => changeSettings(e.target.value)}
+      >
+        <option key="key" value="any">Any Category</option>
+        {categories.trivia_categories
+          .map((categoryObject) =>
+            <option key={categoryObject.name} value={categoryObject.id}>
+              {categoryObject.name}
+            </option>,
+        )}
+      </select>
+    );
+  }
+
+  difficulty() {
+    const { changeSettings } = this.props;
+    return (
+      <select
+        name="difficulty"
+        data-testid="question-difficulty-dropdown"
+        onChange={(e) => changeSettings(e.target.value)}
+      >
+        <option value="any">Any Difficulty</option>
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+    );
+  }
+
+  type() {
+    const { changeSettings } = this.props;
+    return (
+      <select
+        name="type"
+        data-testid="question-type-dropdown"
+        onChange={(x) => changeSettings(x.target.value)}
+      >
+        <option value="any"> Any Type</option>
+        <option value="multiple">Multiple Choice</option>
+        <option value="boolean">True/False</option>
+      </select>
+    );
+  }
+
   render() {
-    const { categories } = this.props;
+    const { categories, categoryLoad, errorCategory } = this.props;
+    if (!categoryLoad) return (<div><Loading /></div>)
     if (categories !== undefined) {
       return (
         <div className="settings-container">
           <h1 className="title">Settings</h1>
           <div className="select">
-            <Category />
+            {this.questionCategory(categories)}
           </div>
           <div className="select">
-            <Difficulty />
+            {this.difficulty()}
           </div>
           <div className="select">
-            <Type />
+            {this.type()}
           </div>
           <Link to="/">
             <button type="button" className="save-settings">Play with this settings</button>
@@ -39,7 +90,7 @@ class Settings extends Component {
         </div>
       );
     }
-    return (<div><Loading /></div>);
+    return (<div>{errorCategory}</div>)
   }
     }
 

@@ -87,7 +87,7 @@ class Settings extends Component {
         </div>
       );
     }
-    return (<div>{errorCategory}</div>)
+    return (<div>{errorCategory}</div>);
   }
     }
 

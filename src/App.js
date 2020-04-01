@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import propTypes from 'prop-types';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Loading from './components/Loading';
 import Home from './components/Home';
 import Game from './components/Game';
 import Feedback from './components/Feedback';

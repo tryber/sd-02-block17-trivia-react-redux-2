@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import propTypes from 'prop-types';
-import { Redirect, Link } from 'react-router-dom';
 import changeUser from '../actions/userChangeAction';
 import loadQuestions from '../actions/loadAction';
+import { Redirect, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './style/Home.css';
 
 class Home extends Component {
@@ -65,8 +65,8 @@ class Home extends Component {
 const mapStateToProps = ({
   player: { name, gravatarEmail },
   loadReducer: { isLoading, error } }) => ({
-  name, gravatarEmail, isLoading, error,
-});
+    name, gravatarEmail, isLoading, error,
+  });
 
 const mapDispatchToProps = (dispatch) => ({
   handleChange: (event) => dispatch(changeUser(event.target)),
@@ -77,12 +77,6 @@ Home.propTypes = {
   name: propTypes.string.isRequired,
   gravatarEmail: propTypes.string.isRequired,
   handleChange: propTypes.func.isRequired,
-  // player: propTypes.shape({
-  //   name: propTypes.string.isRequired,
-  //   assertions: propTypes.number.isRequired,
-  //   score: propTypes.number.isRequired,
-  //   gravatarEmail: propTypes.string.isRequired,
-  // }).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

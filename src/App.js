@@ -4,11 +4,7 @@ import propTypes from 'prop-types';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Loading from './components/Loading';
 import Home from './components/Home';
-<<<<<<< HEAD
 import Game from './components/Game';
-=======
-import Settings from './pages/Settings';
->>>>>>> master
 import Feedback from './components/Feedback';
 import Ranking from './components/Ranking';
 import loadQuestions from './actions/loadAction';
@@ -31,15 +27,15 @@ class App extends Component {
   }
 
   render() {
+    const { isLoading, error } = this.props;
+    if (!isLoading) return (<Loading />);
+    if (error) return (<div className="error">{error}</div>);
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Home} />
-<<<<<<< HEAD
           <Route path="/game" component={Game} />
-=======
-          <Settings path="/settings" component={Settings} />
->>>>>>> master
+          <Route path="/settings" component={Settings} />
           <Route path="/feedback" component={Feedback} />
           <Route path="/ranking" component={Ranking} />
         </Switch>

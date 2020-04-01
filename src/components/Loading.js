@@ -6,7 +6,7 @@ function Loading() {
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
       <p>
-        Iniciando
+        Carregando...
       </p>
     </header>
   );

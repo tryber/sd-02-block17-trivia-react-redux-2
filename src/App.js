@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Game from './components/Game';
 import Feedback from './components/Feedback';
 import Ranking from './components/Ranking';
+import Settings from './components/Settings';
 import loadQuestions from './actions/loadAction';
 import './App.css';
 

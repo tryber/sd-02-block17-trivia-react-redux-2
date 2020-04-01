@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Loading from '../components/Loading';
+import Loading from './Loading';
 
-import Category from '../components/Category';
-import Type from '../components/Type';
-import Difficulty from '../components/Difficulty';
+import Category from './pages/Category';
+import Type from './pages/Type';
+import Difficulty from './pages/Difficulty';
 import loadCategory from '../actions/loadCategory';
-import '../style/Settings.css';
+import '../components/style/Settings.css';
 
 class Settings extends Component {
 

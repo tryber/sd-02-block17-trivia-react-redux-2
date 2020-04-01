@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { changeCategory } from '../actions/questionFilter';
+import { changeCategory } from '../../actions/questionFilter';
 
 function QuestionCategory({ categories, changeSettings }) {
   return (

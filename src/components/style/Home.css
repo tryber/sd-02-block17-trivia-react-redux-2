@@ -1,0 +1,75 @@
+.error {
+  font-size: 50px;
+  margin: 250px;
+  text-align: center;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.home p , .home input {
+  align-items: center;
+  display: inline-block;
+  font-size: 50px;
+  margin: 10px;
+  text-align: left;
+  width: 50%;
+}
+
+.config-button {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 20px;
+}
+
+.config-button button {
+  background-color: rgb(49, 10, 10);
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
+}
+
+.btn-play {
+  background-color: rgb(134, 214, 96);
+  font-size: 50px;
+  height: 80px;
+  margin: 10px;
+  text-align: center;
+  width: 50%;
+}
+
+header {
+  background-color: rgb(196, 196, 196);
+  display: flex;
+  font-size: 30px;
+  justify-content: space-between;
+}
+
+header div {
+  align-items: center;
+  display: flex;
+  margin: 10px;
+}
+
+.header-right {
+  justify-content: space-around;
+  width: 20%;
+}
+
+.buttons {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-ranking {
+  background-color: rgb(240, 240, 240);
+  font-size: 50px;
+  height: 80px;
+  margin: 10px;
+  text-align: center;
+  width: 50%;
+}

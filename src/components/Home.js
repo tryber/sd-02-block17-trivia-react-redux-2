@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import propTypes from 'prop-types';
 import { Redirect, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import propTypes from 'prop-types';
 import changeUser from '../actions/userChangeAction';
+import loadQuestions from '../actions/loadAction';
+import './style/Home.css';
 
 class Home extends Component {
   constructor(props) {
@@ -10,11 +12,25 @@ class Home extends Component {
     this.state = { shouldRedirect: false };
   }
 
+  // componentDidMount() {
+  //   const { returnTriviaAPI, player } = this.props;
+  //   const questions = 'api.php?amount=5';
+  //   returnTriviaAPI(questions);
+  //   localStorage.setItem('player', JSON.stringify(player));
+  // }
+
+  // componentDidUpdate(prevProps) {
+  //   const { player } = this.props;
+  //   if (prevProps.player !== player) {
+  //     localStorage.setItem('player', JSON.stringify(player));
+  //   }
+  // }
+
   render() {
     const { name, gravatarEmail, handleChange } = this.props;
     const { shouldRedirect } = this.state;
 
-    if (shouldRedirect) return <Redirect to="/feedback" />;
+    if (shouldRedirect) return <Redirect to="/game" />;
 
     return (
       <div className="home">
@@ -46,13 +62,15 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = ({ player: { name, gravatarEmail } }) => ({
-  name,
-  gravatarEmail,
-});
+const mapStateToProps = ({
+  player: { name, gravatarEmail },
+  loadReducer: { isLoading, error } }) => ({
+    name, gravatarEmail, isLoading, error,
+  });
 
 const mapDispatchToProps = (dispatch) => ({
   handleChange: (event) => dispatch(changeUser(event.target)),
+  returnTriviaAPI: (questions) => dispatch(loadQuestions(questions)),
 });
 
 Home.propTypes = {

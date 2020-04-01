@@ -5,6 +5,7 @@ function apiSucess(infos) {
   return {
     type: types.LOAD_USER,
     token: infos,
+    load: true,
   };
 }
 

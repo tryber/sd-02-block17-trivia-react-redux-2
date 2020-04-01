@@ -1,0 +1,73 @@
+.settings-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+}
+
+.title {
+  margin: 0 2em 0.25em;
+}
+
+select {
+  background: lightgrey;
+  background-image: none;
+  border: 0;
+  cursor: pointer;
+  flex: 1;
+  font-size: 1rem;
+  padding: 0 0.5em;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.select {
+  background: lightgrey;
+  border-radius: 0.25em;
+  display: flex;
+  font-size: 1.2rem;
+  height: 3em;
+  line-height: 3;
+  margin: 10px;
+  overflow: hidden;
+  position: relative;
+  width: 20em;
+}
+
+.select:after {
+  background: darkgray;
+  content: '\25BC';
+  cursor: pointer;
+  padding: 0 1em;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.select:hover:after {
+  color: white;
+}
+
+.save-settings {
+  background: lightgreen;
+  border: 0;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  margin-top: 10px;
+  padding: 1rem 1.25rem;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.save-settings:hover {
+  background: #5ce473;
+}

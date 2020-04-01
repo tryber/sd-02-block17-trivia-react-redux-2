@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Loading from './Loading';
-import Type from './pages/Type';
 import loadCategory from '../actions/loadCategory';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { changeCategory } from '../actions/questionFilter';
-import { changeDifficulty } from '../actions/questionFilter';
 
 import '../components/style/Settings.css';
 
@@ -102,6 +99,7 @@ const mapStateToProps = ({ loadReducer: { categoryLoad, categories, errorCategor
 
 const mapDispatchToProps = (dispatch) => ({
   returnCategoryName: (categories) => dispatch(loadCategory(categories)),
+  changeSettings: (callActions, value) => dispatch(callActions(value)),
 });
 
 Settings.defaultProps = {
@@ -111,6 +109,7 @@ Settings.defaultProps = {
 Settings.propTypes = {
   returnCategoryName: PropTypes.func.isRequired,
   categories: PropTypes.instanceOf(Object).isRequired,
+  changeSettings: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

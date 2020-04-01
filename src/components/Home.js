@@ -62,7 +62,9 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = ({ player: { name, gravatarEmail }, loadReducer: { isLoading, error } }) => ({
+const mapStateToProps = ({
+  player: { name, gravatarEmail },
+  loadReducer: { isLoading, error } }) => ({
   name, gravatarEmail, isLoading, error,
 });
 
@@ -75,9 +77,6 @@ Home.propTypes = {
   name: propTypes.string.isRequired,
   gravatarEmail: propTypes.string.isRequired,
   handleChange: propTypes.func.isRequired,
-  isLoading: propTypes.bool.isRequired,
-  returnTriviaAPI: propTypes.func.isRequired,
-  error: propTypes.string.isRequired,
   // player: propTypes.shape({
   //   name: propTypes.string.isRequired,
   //   assertions: propTypes.number.isRequired,

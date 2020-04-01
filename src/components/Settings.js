@@ -114,6 +114,6 @@ Settings.propTypes = {
 
 Settings.defaultProps = {
   categoryLoad: false,
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

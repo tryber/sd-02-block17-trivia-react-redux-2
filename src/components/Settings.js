@@ -53,9 +53,9 @@ const mapDispatchToProps = (dispatch) => ({
   returnCategoryName: (categories) => dispatch(loadCategory(categories)),
 });
 
-// Settings.defaultProps = {
-//   categories: [],
-// };
+Settings.defaultProps = {
+  categories: [],
+};
 
 Settings.propTypes = {
   returnCategoryName: PropTypes.func.isRequired,

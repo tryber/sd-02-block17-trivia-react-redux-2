@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import { Redirect, Link } from 'react-router-dom';
 import changeUser from '../actions/userChangeAction';
-import './style/Home.css'
+import './style/Home.css';
 
 class Home extends Component {
   constructor(props) {

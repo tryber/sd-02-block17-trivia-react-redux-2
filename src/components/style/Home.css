@@ -1,22 +1,22 @@
 .error {
-  text-align: center;
   font-size: 50px;
   margin: 250px;
+  text-align: center;
 }
 
 .home {
-  text-align: center;
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
-.home p, .home input {
+.home p , .home input {
+  align-items: center;
   display: inline-block;
-  text-align: left;
   font-size: 50px;
   margin: 10px;
+  text-align: left;
   width: 50%;
-  align-items: center;
 }
 
 .config-button {
@@ -26,51 +26,50 @@
 }
 
 .config-button button {
-  width: 70px;
-  height: 70px;
-  background-color: #310A0A;
+  background-color: rgb( 49 , 10 , 10 );
   border-radius: 50%;
+  height: 70px;
+  width: 70px;
 }
 
 .btn-play {
-  height: 80px;
-  background-color: #86D660;
-  text-align: center;
+  background-color: rgb( 134 , 214 , 96 );
   font-size: 50px;
-  width: 50%;
+  height: 80px;
   margin: 10px;
+  text-align: center;
+  width: 50%;
 }
 
 header {
+  background-color: rgb( 196 , 196 , 196 );
   display: flex;
-  justify-content: space-between;
-  background-color: #C4C4C4;
   font-size: 30px;
+  justify-content: space-between;
 }
 
 header div {
+  align-items: center;
   display: flex;
   margin: 10px;
-  align-items: center;
 }
 
 .header-right {
-  width: 20%;
   justify-content: space-around;
+  width: 20%;
 }
 
 .buttons {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .btn-ranking {
-  height: 80px;
-  background-color: #F0F0F0;
-  text-align: center;
+  background-color: rgb( 240 , 240 , 240 );
   font-size: 50px;
-  width: 50%;
+  height: 80px;
   margin: 10px;
+  text-align: center;
+  width: 50%;
 }
-

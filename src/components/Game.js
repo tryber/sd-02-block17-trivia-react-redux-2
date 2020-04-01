@@ -3,21 +3,21 @@ import './style/Game.css';
 
 class Game extends Component {
 
-  renderHeader() {
+  static renderHeader() {
     return (
       <header className="header-left">
         <div className="gravatar-image">
             Imagem Aqui
-          <p data-testid="header-player-name">{`Jogador: Jogador`}</p>
+          <p data-testid="header-player-name">{'Jogador'}</p>
         </div>
         <div className="header-right">
-          <p data-testid="header-score">{`Pontos: Pontos`}</p>
+          <p data-testid="header-score">{'Pontos'}</p>
         </div>
-    </header>
-    )
+      </header>
+    );
   }
 
-  renderGame() {
+  static renderGame() {
     return (
       <div>
         <div>
@@ -25,7 +25,7 @@ class Game extends Component {
           <p>Pergunta</p>
         </div>
       </div>
-    )
+    );
   }
 
   render() {
@@ -38,7 +38,7 @@ class Game extends Component {
           {this.renderGame()}
         </div>
       </div>
-    )
+    );
   }
 }
 

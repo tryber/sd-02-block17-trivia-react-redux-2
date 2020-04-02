@@ -9,12 +9,12 @@ import '../components/style/Settings.css';
 
 class Settings extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       category: '',
       difficulty: '',
-      type:  '',
-    }
+      type: '',
+    };
     this.handleOnChange = this.handleOnChange.bind(this);
   }
 
@@ -25,7 +25,7 @@ class Settings extends Component {
   }
 
   handleOnChange(name, value) {
-    this.setState({ [name]: value })
+    this.setState({ [name]: value });
   }
 
   questionCategory(categories) {

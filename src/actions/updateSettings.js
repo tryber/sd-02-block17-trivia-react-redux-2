@@ -14,7 +14,7 @@ function updateSettingsCategories(settings) {
 
 const updateSettings = (settings) => (
   (dispatch) => {
-    return dispatch(updateSettingsCategories(settings))
+    return dispatch(updateSettingsCategories(settings));
   }
 );
 

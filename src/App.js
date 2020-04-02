@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Game from './components/Game';
@@ -7,21 +7,16 @@ import Ranking from './components/Ranking';
 import Settings from './components/Settings';
 import './App.css';
 
-class App extends Component {
-
-  render() {
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/game" component={Game} />
-          <Route path="/settings" component={Settings} />
-          <Route path="/feedback" component={Feedback} />
-          <Route path="/ranking" component={Ranking} />
-        </Switch>
-      </BrowserRouter>
-    );
-  }
-}
+const App = () => (
+  <BrowserRouter>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route path="/game" component={Game} />
+      <Route path="/settings" component={Settings} />
+      <Route path="/feedback" component={Feedback} />
+      <Route path="/ranking" component={Ranking} />
+    </Switch>
+  </BrowserRouter>
+);
 
 export default App;

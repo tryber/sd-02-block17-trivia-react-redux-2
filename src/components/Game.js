@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Header from './Header';
 import EachQuestion from './EachQuestion';
-import { Redirect } from 'react-router-dom';
 
 class Game extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class Game extends Component {
     this.state = {
       shouldRedirect: false,
       indexPergunta: 0,
-      shouldRenderNextButton: false
+      shouldRenderNextButton: false,
     };
     this.callback = this.callback.bind(this);
   }

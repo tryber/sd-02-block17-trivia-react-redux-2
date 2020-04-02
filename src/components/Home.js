@@ -26,7 +26,7 @@ class Home extends Component {
   //   }
   // }
 
-  static returnInputs() {
+  returnInputs() {
     const { handleChange } = this.props;
     return (
       <div>

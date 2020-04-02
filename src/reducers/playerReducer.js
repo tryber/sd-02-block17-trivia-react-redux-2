@@ -15,6 +15,8 @@ const userReducer = (state = initialState, action) => {
     };
   } else if (action.type === types.CLEAR_USER_DATA) {
     return initialState;
+  } else if (action.type === 'CHANGE_PLACAR') {
+    return { ...state, assertions: state.assertions + 1, score: state.score + 10 };
   }
 
   return state;

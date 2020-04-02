@@ -12,17 +12,14 @@ import './App.css';
 class App extends Component {
 
   componentDidMount() {
-    const { name } = this.props;
-    console.log(name)
-    // const questions = 'api.php?amount=5';
-    // returnTriviaAPI(questions);
-    localStorage.setItem('player', JSON.stringify(name));
+    const { player } = this.props;
+    localStorage.setItem('player', JSON.stringify(player));
   }
 
   componentDidUpdate(prevProps) {
-    const { name } = this.props;
-    if (prevProps.name !== name) {
-      localStorage.setItem('player', JSON.stringify(name));
+    const { player } = this.props;
+    if (prevProps.player !== player) {
+      localStorage.setItem('player', JSON.stringify(player));
     }
   }
 
@@ -42,16 +39,14 @@ class App extends Component {
 }
 
 const mapStateToProps = ({
-  player: { name } }) => ({
-    name,
+  player }) => ({
+    player,
   });
 
 export default connect(mapStateToProps)(App);
 
 App.propTypes = {
-  name: propTypes.string,
+    player: propTypes.shape({
+    name: propTypes.string.isRequired,
+  }).isRequired,
 };
-
-App.defaultpropTypes ={
-  name: undefined,
-}

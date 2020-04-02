@@ -26,9 +26,24 @@ class Home extends Component {
   //   }
   // }
 
+  static returnInputs() {
+    const { handleChange } = this.props;
+    return (
+      <div>
+        <div>
+          <p>Email do Gravatar:</p>
+          <input name="gravatarEmail" onChange={handleChange} data-testid="input-gravatar-email" />
+        </div>
+        <div>
+          <p>Nome do Jogador:</p>
+          <input name="name" onChange={handleChange} data-testid="input-player-name" />
+        </div>
+      </div>
+    );
+  }
+
   render() {
-    const { name, gravatarEmail, handleChange} = this.props;
-    console.log(this.props)
+    const { name, gravatarEmail, handleChange } = this.props;
     const { shouldRedirect } = this.state;
 
     if (shouldRedirect) return <Redirect to="/game" />;
@@ -40,14 +55,7 @@ class Home extends Component {
             <button data-testid="config-button" />
           </div>
         </Link>
-        <div>
-          <p>Email do Gravatar:</p>
-          <input name="gravatarEmail" onChange={handleChange} data-testid="input-gravatar-email" />
-        </div>
-        <div>
-          <p>Nome do Jogador:</p>
-          <input name="name" onChange={handleChange} data-testid="input-player-name" />
-        </div>
+        {this.returnInputs()}
         <div>
           <button
             disabled={(name && gravatarEmail) ? '' : 'disabled'}

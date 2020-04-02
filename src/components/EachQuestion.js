@@ -134,7 +134,7 @@ class EachQuestion extends Component {
       alteraPlacar();
     }
 
-    if (indexPergunta !== 4) {
+    if (indexPergunta > 0) {
       callbackProximaPergunta();
     } else {
       setTimeout(callbackFeedback, 2000);

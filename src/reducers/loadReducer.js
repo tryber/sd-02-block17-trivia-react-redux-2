@@ -15,16 +15,6 @@ const initialState = {
         'Your fists',
       ],
     },
-    {
-      category: 'Entertainment: Video Games',
-      type: 'boolean',
-      difficulty: 'hard',
-      question: 'TF2: Sentry rocket damage falloff is calculated based on the distance between the sentry and the enemy, not the engineer and the enemy',
-      correct_answer: 'False',
-      incorrect_answers: [
-        'True',
-      ],
-    },
   ],
   player: [
     { name: {} },

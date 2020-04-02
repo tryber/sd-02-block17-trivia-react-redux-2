@@ -13,7 +13,8 @@ class Game extends Component {
       indexPergunta: 0,
       shouldRenderNextButton: false,
     };
-    this.callback = this.callback.bind(this);
+    this.callbackProximaPergunta = this.callbackProximaPergunta.bind(this);
+    this.callbackFeedback = this.callbackFeedback.bind(this);
   }
 
   callbackProximaPergunta() {

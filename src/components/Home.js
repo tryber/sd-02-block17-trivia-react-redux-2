@@ -41,11 +41,11 @@ class Home extends Component {
         </Link>
         <div>
           <p>Email do Gravatar:</p>
-          <input name="gravatarEmail" onChange={handleChange} data-testid="input-gravatar-email" />
+          <input name="gravatarEmail" onChange={handleChange} data-testid="input-gravatar-email" value={gravatarEmail} />
         </div>
         <div>
           <p>Nome do Jogador:</p>
-          <input name="name" onChange={handleChange} data-testid="input-player-name" />
+          <input name="name" onChange={handleChange} data-testid="input-player-name" value={name} />
         </div>
         <div>
           <button

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Home from './components/Home';
 import Game from './components/Game';
 import Feedback from './components/Feedback';
@@ -7,7 +8,19 @@ import Ranking from './components/Ranking';
 import Settings from './components/Settings';
 import './App.css';
 
+
 class App extends Component {
+  componentDidMount() {
+    const { player } = this.props;
+    localStorage.setItem('player', JSON.stringify(player));
+  }
+
+  componentDidUpdate(prevProps) {
+    const { player } = this.props;
+    if (prevProps.player !== player) {
+      localStorage.setItem('player', JSON.stringify(player));
+    }
+  }
 
   render() {
     return (
@@ -24,4 +37,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = ({ player }) => ({
+  player,
+});
+
+export default connect(mapStateToProps)(App);

@@ -1,9 +1,9 @@
+import propTypes from 'prop-types';
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Home from './components/Home';
 import Game from './components/Game';
-import propTypes from 'prop-types';
 import Feedback from './components/Feedback';
 import Ranking from './components/Ranking';
 import Settings from './components/Settings';
@@ -46,7 +46,7 @@ const mapStateToProps = ({
 export default connect(mapStateToProps)(App);
 
 App.propTypes = {
-    player: propTypes.shape({
+  player: propTypes.shape({
     name: propTypes.string.isRequired,
   }).isRequired,
 };

@@ -45,9 +45,3 @@ const mapStateToProps = ({
   });
 
 export default connect(mapStateToProps)(App);
-
-App.propTypes ={
-  player: propTypes.shape({
-    name: propTypes.string.isRequired,
-  }).isRequired,
-};

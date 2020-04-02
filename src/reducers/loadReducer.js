@@ -9,6 +9,7 @@ const initialState = {
   ],
   isLoading: false,
   error: '',
+  settings: [],
 };
 
 function loadAPI(state, action) {
@@ -39,6 +40,12 @@ function loadCategory(state, action) {
   };
 }
 
+function updateSettings(state, action) {
+  return {
+    ...state,
+    settings: action.settings,
+  };
+}
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -52,6 +59,8 @@ export default function reducer(state = initialState, action) {
       return { ...state, isLoading: false, error: action.error };
     case types.LOAD_CATEGORIES:
       return loadCategory(state, action);
+    case types.CHANGE_CATEGORY:
+      return updateSettings(state, action);
     default:
       return state;
   }

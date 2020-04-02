@@ -2,7 +2,7 @@ import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import changeUser from '../actions/userChangeAction';
+import changeUser from '../actions/updateSettings';
 import loadQuestions from '../actions/loadAction';
 import './style/Home.css';
 
@@ -27,7 +27,8 @@ class Home extends Component {
   // }
 
   render() {
-    const { name, gravatarEmail, handleChange } = this.props;
+    const { name, gravatarEmail, handleChange} = this.props;
+    console.log(this.props)
     const { shouldRedirect } = this.state;
 
     if (shouldRedirect) return <Redirect to="/game" />;
@@ -64,8 +65,8 @@ class Home extends Component {
 
 const mapStateToProps = ({
   player: { name, gravatarEmail },
-  loadReducer: { isLoading, error } }) => ({
-    name, gravatarEmail, isLoading, error,
+  loadReducer: { isLoading, error, settings } }) => ({
+    name, gravatarEmail, isLoading, error, settings,
   });
 
 const mapDispatchToProps = (dispatch) => ({

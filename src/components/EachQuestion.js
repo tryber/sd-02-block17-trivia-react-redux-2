@@ -122,10 +122,22 @@ class EachQuestion extends Component {
 
     // const { dataMock, alteraPlacar } = this.props;
     // const primeiraPergunta = dataMock[0];
-    const { pergunta: { correct_answer: correctAnswer }, alteraPlacar } = this.props;
+    const {
+      pergunta: { correct_answer: correctAnswer },
+      alteraPlacar,
+      indexPergunta,
+      callbackProximaPergunta,
+      callbackFeedback,
+    } = this.props;
     const { value } = event.target;
     if (value === correctAnswer) {
       alteraPlacar();
+    }
+
+    if (indexPergunta !== 4) {
+      callbackProximaPergunta();
+    } else {
+      setTimeout(callbackFeedback, 2000);
     }
   }
 
@@ -205,6 +217,9 @@ const mapDispatchToProps = (dispatch) => ({
 EachQuestion.propTypes = {
   pergunta: PropTypes.objectOf(PropTypes.string).isRequired,
   alteraPlacar: PropTypes.func.isRequired,
+  callbackProximaPergunta: PropTypes.func.isRequired,
+  callbackFeedback: PropTypes.func.isRequired,
+  indexPergunta: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EachQuestion);

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import changeUser from '../actions/changeUser';
-import loadQuestions from '../actions/loadAction';
 import './style/Home.css';
 
 class Home extends Component {

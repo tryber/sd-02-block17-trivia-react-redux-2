@@ -9,8 +9,8 @@ function apiRequest() {
 
 function apiSuccess(infos) {
   return {
-    type: types.LOAD_CATEGORIES,
-    category: infos,
+    type: types.LOAD_API,
+    data: infos,
   };
 }
 

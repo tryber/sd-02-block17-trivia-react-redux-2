@@ -43,7 +43,7 @@ class Home extends Component {
   }
 
   render() {
-    const { name, gravatarEmail, handleChange } = this.props;
+    const { name, gravatarEmail } = this.props;
     const { shouldRedirect } = this.state;
 
     if (shouldRedirect) return <Redirect to="/game" />;

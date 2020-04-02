@@ -13,9 +13,7 @@ function updateSettingsCategories(settings) {
 }
 
 const updateSettings = (settings) => (
-  (dispatch) => {
-    return dispatch(updateSettingsCategories(settings));
-  }
+  (dispatch) => dispatch(updateSettingsCategories(settings))
 );
 
 export default updateSettings;

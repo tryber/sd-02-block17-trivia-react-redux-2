@@ -18,7 +18,12 @@ class Home extends Component {
       <div>
         <div>
           <p>Email do Gravatar:</p>
-          <input name="gravatarEmail" onChange={handleChange} data-testid="input-gravatar-email" value={gravatarEmail} />
+          <input
+            name="gravatarEmail"
+            onChange={handleChange}
+            data-testid="input-gravatar-email"
+            value={gravatarEmail}
+          />
         </div>
         <div>
           <p>Nome do Jogador:</p>

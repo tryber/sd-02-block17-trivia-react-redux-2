@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import imageLink from '../service/hashConverter';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import imageLink from '../service/hashConverter';
 
-class Header extends Component {  
+class Header extends Component {
   render() {
     const { gravatarEmail, name, score, configButton } = this.props;
 
@@ -30,5 +31,12 @@ const mapStateToProps = ({ player: { gravatarEmail, name, score } }) => ({
   name,
   score,
 });
+
+Header.propTypes = {
+  gravatarEmail: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
+  configButton: PropTypes.bool,
+};
 
 export default connect(mapStateToProps)(Header);

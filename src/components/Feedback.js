@@ -74,7 +74,7 @@ class Feedback extends Component {
 
     return (
       <div>
-        <Header configButton={true} />
+        <Header configButton />
         {this.renderSection()}
       </div>
     );
@@ -93,8 +93,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Feedback.propTypes = {
-  gravatarEmail: propTypes.string.isRequired,
-  name: propTypes.string.isRequired,
   score: propTypes.number.isRequired,
   assertions: propTypes.number.isRequired,
   clearPlayer: propTypes.func.isRequired,

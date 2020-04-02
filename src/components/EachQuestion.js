@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 // import Header from './Header';
-//import imageLink from '../service/hashConverter';
+// import imageLink from '../service/hashConverter';
 import './style/Game.css';
 
 class EachQuestion extends Component {
@@ -74,18 +75,58 @@ class EachQuestion extends Component {
   // }
 
   componentDidMount() {
+  //   const { pergunta } = this.props;
+  //   // const primeiraPergunta = dataMock[0];
+  //   const { correct_answer: correctAnswer, incorrect_answers: incorrectAnswers } = pergunta;
+
+  //   const arrayAlternativas = [correctAnswer];
+  //   let indexNovaAlternativa;
+
+  //   incorrectAnswers.forEach((item, index) => {
+  //     indexNovaAlternativa = Math.round(Math.random() * (index + 1));
+  //     arrayAlternativas.splice(indexNovaAlternativa, 0, incorrectAnswers[index]);
+  //   });
+  //   this.setState({ arrayAlternativas });
+
+    this.geraAlternativasMisturadas();
+  }
+
+  geraAlternativasMisturadas() {
     const { pergunta } = this.props;
     // const primeiraPergunta = dataMock[0];
-    const { correct_answer, incorrect_answers } = pergunta;
+    const { correct_answer: correctAnswer, incorrect_answers: incorrectAnswers } = pergunta;
 
-    const arrayAlternativas = [correct_answer];
+    const arrayAlternativas = [correctAnswer];
     let indexNovaAlternativa;
 
-    incorrect_answers.forEach((item, index) => {
+    incorrectAnswers.forEach((item, index) => {
       indexNovaAlternativa = Math.round(Math.random() * (index + 1));
-      arrayAlternativas.splice(indexNovaAlternativa, 0, incorrect_answers[index]);
+      arrayAlternativas.splice(indexNovaAlternativa, 0, incorrectAnswers[index]);
     });
     this.setState({ arrayAlternativas });
+  }
+
+  setaClasse(alternativa) {
+    const { foiRespondido } = this.state;
+    // const { dataMock } = this.props;
+    // const primeiraPergunta = dataMock[0];
+    const { pergunta: { correct_answer: correctAnswer } } = this.props;
+    if (foiRespondido) {
+      return (alternativa === correctAnswer) ? 'correct-answer' : 'incorrect-answer';
+    }
+    return 'alternative-button';
+  }
+
+  handleClick(event) {
+    this.setState({ foiRespondido: true });
+
+    // const { dataMock, alteraPlacar } = this.props;
+    // const primeiraPergunta = dataMock[0];
+    const { pergunta: { correct_answer: correctAnswer } } = this.props;
+    const { value } = event.target;
+    if (value === correctAnswer) {
+      alteraPlacar();
+    }
   }
 
   renderizaAPergunta() {
@@ -137,29 +178,6 @@ class EachQuestion extends Component {
     );
   }
 
-  setaClasse(alternativa) {
-    const { foiRespondido } = this.state;
-    const { dataMock } = this.props;
-    const primeiraPergunta = dataMock[0];
-    const { correct_answer } = primeiraPergunta;
-    if (foiRespondido) {
-      return (alternativa === correct_answer) ? 'correct-answer' : 'incorrect-answer';
-    }
-    return 'alternative-button';
-  }
-
-  handleClick(event) {
-    this.setState({ foiRespondido: true });
-
-    const { dataMock, alteraPlacar } = this.props;
-    const primeiraPergunta = dataMock[0];
-    const { correct_answer } = primeiraPergunta;
-    const { value } = event.target;
-    if (value === correct_answer) {
-      alteraPlacar();
-    }
-  }
-
   render() {
     return (
       <div>
@@ -170,7 +188,10 @@ class EachQuestion extends Component {
   }
 }
 
-const mapStateToProps = ({ loadReducer: { dataMock }, player: { gravatarEmail, name, score } }) => ({
+const mapStateToProps = ({
+  loadReducer: { dataMock },
+  player: { gravatarEmail, name, score },
+}) => ({
   gravatarEmail,
   name,
   score,
@@ -180,5 +201,11 @@ const mapStateToProps = ({ loadReducer: { dataMock }, player: { gravatarEmail, n
 const mapDispatchToProps = (dispatch) => ({
   alteraPlacar: () => dispatch({ type: 'CHANGE_PLACAR' }),
 });
+
+EachQuestion.propTypes = {
+  pergunta: PropTypes.object.isRequired,
+  dataMock: PropTypes.array,
+  alteraPlacar: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(EachQuestion);

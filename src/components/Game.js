@@ -1,16 +1,54 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Header from './Header';
 import EachQuestion from './EachQuestion';
 
 class Game extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      shouldRedirect: false,
+      indexPergunta: 0,
+      shouldRenderNextButton: false,
+    };
+    this.callbackProximaPergunta = this.callbackProximaPergunta.bind(this);
+    this.callbackFeedback = this.callbackFeedback.bind(this);
+  }
+
+  callbackProximaPergunta() {
+    // this.setState((state) => ({ indexPergunta: state.indexPergunta + 1 }));
+    this.setState({ shouldRenderNextButton: true });
+  }
+
+  callbackFeedback() {
+    // this.setState((state) => ({ indexPergunta: state.indexPergunta + 1 }));
+    this.setState({ shouldRedirect: true });
+  }
+
   render() {
     const { dataMock } = this.props;
+    const { indexPergunta, shouldRenderNextButton, shouldRedirect } = this.state;
+
+    if (shouldRedirect) return <Redirect to="/feedback" />;
+
     return (
       <div>
         <Header />
-        <EachQuestion pergunta={dataMock[0]} />
+        <EachQuestion
+          callbackProximaPergunta={this.callbackProximaPergunta}
+          callbackFeedback={this.callbackFeedback}
+          pergunta={dataMock[indexPergunta]}
+          indexPergunta={indexPergunta}
+        />
+        {shouldRenderNextButton &&
+          <button
+            onClick={() => this.setState((state) => ({ indexPergunta: state.indexPergunta + 1 }))}
+          >
+            PRÓXIMA
+          </button>
+        }
       </div>
     );
   }

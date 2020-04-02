@@ -23,18 +23,6 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
-    const { player } = this.props;
-    localStorage.setItem('player', JSON.stringify(player));
-  }
-
-  componentDidUpdate(prevProps) {
-    const { player } = this.props;
-    if (prevProps.player !== player) {
-      localStorage.setItem('player', JSON.stringify(player));
-    }
-  }
-
   render() {
     return (
       <BrowserRouter>

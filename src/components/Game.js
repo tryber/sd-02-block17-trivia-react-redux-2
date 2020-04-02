@@ -1,45 +1,31 @@
 import React, { Component } from 'react';
-import './style/Game.css';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import Header from './Header';
+import EachQuestion from './EachQuestion';
 
 class Game extends Component {
-
-  static renderHeader() {
-    return (
-      <header className="header-left">
-        <div className="gravatar-image">
-            Imagem Aqui
-          <p data-testid="header-player-name">{'Jogador'}</p>
-        </div>
-        <div className="header-right">
-          <p data-testid="header-score">{'Pontos'}</p>
-        </div>
-      </header>
-    );
-  }
-
-  static renderGame() {
+  render() {
+    const { dataMock } = this.props;
     return (
       <div>
-        <div>
-          Titulo Pergunta
-          <p>Pergunta</p>
-        </div>
-      </div>
-    );
-  }
-
-  render() {
-    return (
-      <div className="container-questions">
-        <div className="container-Header">
-          {this.renderHeader()}
-        </div>
-        <div className="container-page">
-          {this.renderGame()}
-        </div>
+        <Header />
+        <EachQuestion pergunta={dataMock[0]} />
       </div>
     );
   }
 }
 
-export default Game;
+const mapStateToProps = ({ loadReducer: { dataMock } }) => ({
+  dataMock,
+});
+
+Game.propTypes = {
+  dataMock: PropTypes.arrayOf(PropTypes.object),
+};
+
+Game.defaultProps = {
+  dataMock: [],
+};
+
+export default connect(mapStateToProps)(Game);

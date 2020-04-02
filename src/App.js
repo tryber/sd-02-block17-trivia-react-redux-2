@@ -9,8 +9,8 @@ import Ranking from './components/Ranking';
 import Settings from './components/Settings';
 import './App.css';
 
-class App extends Component {
 
+class App extends Component {
   componentDidMount() {
     const { player } = this.props;
     localStorage.setItem('player', JSON.stringify(player));

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import propTypes from 'prop-types';
-import imageLink from '../service/hashConverter';
+import Header from './Header';
 import playerCleanupAction from '../actions/playerCleanupAction';
 
 class Feedback extends Component {
@@ -18,26 +18,26 @@ class Feedback extends Component {
     this.setState({ shouldRedirectToHome: true });
   }
 
-  renderHeader() {
-    const { gravatarEmail, name, score } = this.props;
+  // renderHeader() {
+  //   const { gravatarEmail, name, score } = this.props;
 
-    return (
-      <header>
-        <div className="header-left">
-          <div className="gravatar-image">
-            <img alt="gravatar" src={imageLink(gravatarEmail)} />
-          </div>
-          <p data-testid="header-player-name">{`Jogador: ${name}`}</p>
-        </div>
-        <div className="header-right">
-          <p data-testid="header-score">{`Pontos: ${score}`}</p>
-          <div className="config-button">
-            <button data-testid="config-button" />
-          </div>
-        </div>
-      </header>
-    );
-  }
+  //   return (
+  //     <header>
+  //       <div className="header-left">
+  //         <div className="gravatar-image">
+  //           <img alt="gravatar" src={imageLink(gravatarEmail)} />
+  //         </div>
+  //         <p data-testid="header-player-name">{`Jogador: ${name}`}</p>
+  //       </div>
+  //       <div className="header-right">
+  //         <p data-testid="header-score">{`Pontos: ${score}`}</p>
+  //         <div className="config-button">
+  //           <button data-testid="config-button" />
+  //         </div>
+  //       </div>
+  //     </header>
+  //   );
+  // }
 
   renderSection() {
     const { score, assertions } = this.props;
@@ -74,7 +74,7 @@ class Feedback extends Component {
 
     return (
       <div>
-        {this.renderHeader()}
+        <Header configButton />
         {this.renderSection()}
       </div>
     );
@@ -93,8 +93,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Feedback.propTypes = {
-  gravatarEmail: propTypes.string.isRequired,
-  name: propTypes.string.isRequired,
   score: propTypes.number.isRequired,
   assertions: propTypes.number.isRequired,
   clearPlayer: propTypes.func.isRequired,

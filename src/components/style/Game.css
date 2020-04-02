@@ -15,3 +15,17 @@ header {
   font-size: 30px;
   justify-content: space-between;
 }
+
+.alternative-button {
+  background-color: #c4c4c4;
+}
+
+.correct-answer {
+  background-color: #c4c4c4;
+  border: 3px solid green;
+}
+
+.incorrect-answer {
+  background-color: #c4c4c4;
+  border: 3px solid red;
+}

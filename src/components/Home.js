@@ -13,16 +13,21 @@ class Home extends Component {
   }
 
   returnInputs() {
-    const { handleChange } = this.props;
+    const { handleChange, gravatarEmail, name } = this.props;
     return (
       <div>
         <div>
           <p>Email do Gravatar:</p>
-          <input name="gravatarEmail" onChange={handleChange} data-testid="input-gravatar-email" />
+          <input
+            name="gravatarEmail"
+            onChange={handleChange}
+            data-testid="input-gravatar-email"
+            value={gravatarEmail}
+          />
         </div>
         <div>
           <p>Nome do Jogador:</p>
-          <input name="name" onChange={handleChange} data-testid="input-player-name" />
+          <input name="name" onChange={handleChange} data-testid="input-player-name" value={name} />
         </div>
       </div>
     );

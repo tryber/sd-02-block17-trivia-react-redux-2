@@ -2,8 +2,8 @@ import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import changeUser from '../actions/userChangeAction';
-import loadQuestions from '../actions/loadAction';
+import changeUser from '../actions/changeUser';
+import loadQuestions from '../actions/loadQuestions';
 import './style/Home.css';
 
 class Home extends Component {
@@ -12,22 +12,24 @@ class Home extends Component {
     this.state = { shouldRedirect: false };
   }
 
-  // componentDidMount() {
-  //   const { returnTriviaAPI, player } = this.props;
-  //   const questions = 'api.php?amount=5';
-  //   returnTriviaAPI(questions);
-  //   localStorage.setItem('player', JSON.stringify(player));
-  // }
-
-  // componentDidUpdate(prevProps) {
-  //   const { player } = this.props;
-  //   if (prevProps.player !== player) {
-  //     localStorage.setItem('player', JSON.stringify(player));
-  //   }
-  // }
+  returnInputs() {
+    const { handleChange, gravatarEmail, name } = this.props;
+    return (
+      <div>
+        <div>
+          <p>Email do Gravatar:</p>
+          <input name="gravatarEmail" onChange={handleChange} data-testid="input-gravatar-email" value={gravatarEmail} />
+        </div>
+        <div>
+          <p>Nome do Jogador:</p>
+          <input name="name" onChange={handleChange} data-testid="input-player-name" value={name} />
+        </div>
+      </div>
+    );
+  }
 
   render() {
-    const { name, gravatarEmail, handleChange } = this.props;
+    const { name, gravatarEmail } = this.props;
     const { shouldRedirect } = this.state;
 
     if (shouldRedirect) return <Redirect to="/game" />;
@@ -39,14 +41,7 @@ class Home extends Component {
             <button data-testid="config-button" />
           </div>
         </Link>
-        <div>
-          <p>Email do Gravatar:</p>
-          <input name="gravatarEmail" onChange={handleChange} data-testid="input-gravatar-email" value={gravatarEmail} />
-        </div>
-        <div>
-          <p>Nome do Jogador:</p>
-          <input name="name" onChange={handleChange} data-testid="input-player-name" value={name} />
-        </div>
+        {this.returnInputs()}
         <div>
           <button
             disabled={(name && gravatarEmail) ? '' : 'disabled'}
@@ -64,8 +59,8 @@ class Home extends Component {
 
 const mapStateToProps = ({
   player: { name, gravatarEmail },
-  loadReducer: { isLoading, error } }) => ({
-    name, gravatarEmail, isLoading, error,
+  loadReducer: { isLoading, error, settings } }) => ({
+    name, gravatarEmail, isLoading, error, settings,
   });
 
 const mapDispatchToProps = (dispatch) => ({

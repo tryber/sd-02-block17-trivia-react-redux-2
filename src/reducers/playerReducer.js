@@ -1,25 +1,26 @@
 import * as types from '../actions/actionTypes';
 
-const initialState = {
+const playerState = {
   name: '',
   assertions: 0,
   score: 0,
   gravatarEmail: '',
 };
 
-const userReducer = (state = initialState, action) => {
-  if (action.type === types.CHANGE_USER_DATA) {
-    return {
-      ...state,
-      [action.name]: action.value,
-    };
-  } else if (action.type === types.CLEAR_USER_DATA) {
-    return initialState;
-  } else if (action.type === 'CHANGE_PLACAR') {
-    return { ...state, assertions: state.assertions + 1, score: state.score + 10 };
+const playerReducer = (state = playerState, action) => {
+  switch (action.type) {
+    case types.CHANGE_USER_DATA:
+      return {
+        ...state,
+        [action.name]: action.value,
+      };
+    case types.CLEAR_USER_DATA:
+      return playerState;
+    case 'CHANGE_PLACAR':
+      return { ...state, assertions: state.assertions + 1, score: state.score + 10 };
+    default:
+      return state;
   }
-
-  return state;
 };
 
-export default userReducer;
+export default playerReducer;

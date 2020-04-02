@@ -4,10 +4,19 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Loading from './Loading';
 import loadCategory from '../actions/loadCategory';
-
+import updateSettings from '../actions/updateSettings';
 import '../components/style/Settings.css';
 
 class Settings extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      category: '',
+      difficulty: '',
+      type: '',
+    };
+    this.handleOnChange = this.handleOnChange.bind(this);
+  }
 
   componentDidMount() {
     const { returnCategoryName } = this.props;
@@ -15,13 +24,16 @@ class Settings extends Component {
     returnCategoryName(categories);
   }
 
+  handleOnChange(name, value) {
+    this.setState({ [name]: value });
+  }
+
   questionCategory(categories) {
-    const { changeSettings } = this.props;
     return (
       <select
         name="category"
         data-testid="question-category-dropdown"
-        onChange={(e) => changeSettings(e.target.value)}
+        onChange={(e) => this.handleOnChange(e.target.name, e.target.value)}
       >
         <option key="key" value="any">Any Category</option>
         {categories.trivia_categories
@@ -35,12 +47,11 @@ class Settings extends Component {
   }
 
   difficulty() {
-    const { changeSettings } = this.props;
     return (
       <select
         name="difficulty"
         data-testid="question-difficulty-dropdown"
-        onChange={(e) => changeSettings(e.target.value)}
+        onChange={(e) => this.handleOnChange(e.target.name, e.target.value)}
       >
         <option value="any">Any Difficulty</option>
         <option value="easy">Easy</option>
@@ -51,12 +62,11 @@ class Settings extends Component {
   }
 
   type() {
-    const { changeSettings } = this.props;
     return (
       <select
         name="type"
         data-testid="question-type-dropdown"
-        onChange={(x) => changeSettings(x.target.value)}
+        onChange={(e) => this.handleOnChange(e.target.name, e.target.value)}
       >
         <option value="any"> Any Type</option>
         <option value="multiple">Multiple Choice</option>
@@ -66,7 +76,7 @@ class Settings extends Component {
   }
 
   render() {
-    const { categories, categoryLoad } = this.props;
+    const { categories, categoryLoad, changeSettings } = this.props;
     if (!categoryLoad) return (<div><Loading /></div>);
     if (categories !== undefined) {
       return (
@@ -82,7 +92,13 @@ class Settings extends Component {
             {this.type()}
           </div>
           <Link to="/">
-            <button type="button" className="save-settings">Play with this settings</button>
+            <button
+              type="button"
+              className="save-settings"
+              onClick={() => changeSettings(this.state)}
+            >
+              Play with this settings
+            </button>
           </Link>
         </div>
       );
@@ -98,7 +114,7 @@ const mapStateToProps = ({ loadReducer: { categoryLoad, categories } }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   returnCategoryName: (categories) => dispatch(loadCategory(categories)),
-  changeSettings: (callActions, value) => dispatch(callActions(value)),
+  changeSettings: (settings) => dispatch(updateSettings(settings)),
 });
 
 Settings.defaultProps = {
@@ -107,13 +123,14 @@ Settings.defaultProps = {
 
 Settings.propTypes = {
   returnCategoryName: PropTypes.func.isRequired,
-  categories: PropTypes.instanceOf(Object).isRequired,
+  categories: PropTypes.instanceOf(Object),
   changeSettings: PropTypes.func.isRequired,
   categoryLoad: PropTypes.bool,
 };
 
 Settings.defaultProps = {
   categoryLoad: false,
+  categories: [],
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

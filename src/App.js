@@ -1,3 +1,4 @@
+import propTypes from 'prop-types';
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -10,6 +11,18 @@ import './App.css';
 
 
 class App extends Component {
+  componentDidMount() {
+    const { player } = this.props;
+    localStorage.setItem('player', JSON.stringify(player));
+  }
+
+  componentDidUpdate(prevProps) {
+    const { player } = this.props;
+    if (prevProps.player !== player) {
+      localStorage.setItem('player', JSON.stringify(player));
+    }
+  }
+
   componentDidMount() {
     const { player } = this.props;
     localStorage.setItem('player', JSON.stringify(player));
@@ -37,8 +50,15 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ player }) => ({
-  player,
-});
+const mapStateToProps = ({
+  player }) => ({
+    player,
+  });
 
 export default connect(mapStateToProps)(App);
+
+App.propTypes = {
+  player: propTypes.shape({
+    name: propTypes.string.isRequired,
+  }).isRequired,
+};

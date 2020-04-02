@@ -2,7 +2,6 @@ import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import updateSettings from '../actions/updateSettings';
 import changeUser from '../actions/changeUser';
 import loadQuestions from '../actions/loadAction';
 import './style/Home.css';
@@ -11,20 +10,6 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = { shouldRedirect: false };
-  }
-
-  componentDidMount() {
-    const { player } = this.props;
-    // const questions = 'api.php?amount=5';
-    // returnTriviaAPI(questions);
-    localStorage.setItem('player', JSON.stringify(player));
-  }
-
-  componentDidUpdate(prevProps) {
-    const { player } = this.props;
-    if (prevProps.player !== player) {
-      localStorage.setItem('player', JSON.stringify(player));
-    }
   }
 
   returnInputs() {
@@ -86,6 +71,7 @@ const mapDispatchToProps = (dispatch) => ({
 Home.propTypes = {
   name: propTypes.string.isRequired,
   gravatarEmail: propTypes.string.isRequired,
+  player: propTypes.instanceOf(Object),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

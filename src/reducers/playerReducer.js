@@ -8,7 +8,7 @@ const playerState = {
 };
 
 const userReducer = (state = playerState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case types.CHANGE_USER_DATA:
       return {
         ...state,

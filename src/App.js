@@ -37,11 +37,17 @@ class App extends Component {
       </BrowserRouter>
     );
   }
-};
+}
 
 const mapStateToProps = ({
   player: { name } }) => ({
-    name
+    name,
   });
 
 export default connect(mapStateToProps)(App);
+
+App.propTypes ={
+  player: propTypes.shape({
+    name: propTypes.string.isRequired,
+  }).isRequired,
+};

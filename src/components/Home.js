@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import changeUser from '../actions/changeUser';
+import loadQuestions from '../actions/loadQuestions';
 import './style/Home.css';
 
 class Home extends Component {
@@ -70,7 +71,11 @@ const mapDispatchToProps = (dispatch) => ({
 Home.propTypes = {
   name: propTypes.string.isRequired,
   gravatarEmail: propTypes.string.isRequired,
-  player: propTypes.instanceOf(Object),
+  handleChange: propTypes.func.isRequired,
+  player: propTypes.shape({
+    name: propTypes.string.isRequired,
+    gravatarEmail: propTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

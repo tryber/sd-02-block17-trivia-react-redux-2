@@ -4,15 +4,15 @@ const initialState = {
   data: [],
   dataMock: [
     {
-      category: "Entertainment: Video Games",
-      type: "multiple",
-      difficulty: "easy",
-      question: "What is the first weapon you acquire in Half-Life?",
-      correct_answer: "A crowbar",
+      category: 'Entertainment: Video Games',
+      type: 'multiple',
+      difficulty: 'easy',
+      question: 'What is the first weapon you acquire in Half-Life?',
+      correct_answer: 'A crowbar',
       incorrect_answers: [
-        "A pistol",
-        "The H.E.V suit",
-        "Your fists",
+        'A pistol',
+        'The H.E.V suit',
+        'Your fists',
       ],
     },
   ],
@@ -30,7 +30,7 @@ function loadAPI(state, action) {
   return {
     ...state,
     data: action.data,
-    //dataMock: action.dataMock,
+    // dataMock: action.dataMock,
     isLoading: false,
   };
 }

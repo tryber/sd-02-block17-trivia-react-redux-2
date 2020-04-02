@@ -17,15 +17,15 @@ header {
 }
 
 .alternative-button {
-  background-color: #C4C4C4;
+  background-color: #c4c4c4;
 }
 
 .correct-answer {
-  background-color: #C4C4C4;
+  background-color: #c4c4c4;
   border: 3px solid green;
 }
 
 .incorrect-answer {
-  background-color: #C4C4C4;
+  background-color: #c4c4c4;
   border: 3px solid red;
 }

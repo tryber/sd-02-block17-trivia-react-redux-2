@@ -91,6 +91,17 @@ class EachQuestion extends Component {
     this.geraAlternativasMisturadas();
   }
 
+  setaClasse(alternativa) {
+    const { foiRespondido } = this.state;
+    // const { dataMock } = this.props;
+    // const primeiraPergunta = dataMock[0];
+    const { pergunta: { correct_answer: correctAnswer } } = this.props;
+    if (foiRespondido) {
+      return (alternativa === correctAnswer) ? 'correct-answer' : 'incorrect-answer';
+    }
+    return 'alternative-button';
+  }
+
   geraAlternativasMisturadas() {
     const { pergunta } = this.props;
     // const primeiraPergunta = dataMock[0];
@@ -106,23 +117,12 @@ class EachQuestion extends Component {
     this.setState({ arrayAlternativas });
   }
 
-  setaClasse(alternativa) {
-    const { foiRespondido } = this.state;
-    // const { dataMock } = this.props;
-    // const primeiraPergunta = dataMock[0];
-    const { pergunta: { correct_answer: correctAnswer } } = this.props;
-    if (foiRespondido) {
-      return (alternativa === correctAnswer) ? 'correct-answer' : 'incorrect-answer';
-    }
-    return 'alternative-button';
-  }
-
   handleClick(event) {
     this.setState({ foiRespondido: true });
 
     // const { dataMock, alteraPlacar } = this.props;
     // const primeiraPergunta = dataMock[0];
-    const { pergunta: { correct_answer: correctAnswer } } = this.props;
+    const { pergunta: { correct_answer: correctAnswer }, alteraPlacar } = this.props;
     const { value } = event.target;
     if (value === correctAnswer) {
       alteraPlacar();
@@ -150,7 +150,7 @@ class EachQuestion extends Component {
     // arrayAlternativas.splice(indexNovaAlternativa, 0, incorrect_answers[1]);
     // indexNovaAlternativa = Math.round(Math.random() * 3);
     // arrayAlternativas.splice(indexNovaAlternativa, 0, incorrect_answers[2]);
-  
+
     const { arrayAlternativas, foiRespondido } = this.state;
     // const { pergunta } = this.props;
     // const primeiraPergunta = dataMock[0];
@@ -203,8 +203,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 EachQuestion.propTypes = {
-  pergunta: PropTypes.object.isRequired,
-  dataMock: PropTypes.array,
+  pergunta: PropTypes.objectOf(PropTypes.string).isRequired,
   alteraPlacar: PropTypes.func.isRequired,
 };
 

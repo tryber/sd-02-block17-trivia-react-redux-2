@@ -39,4 +39,8 @@ Header.propTypes = {
   configButton: PropTypes.bool,
 };
 
+Header.defaultProps = {
+  configButton: false,
+};
+
 export default connect(mapStateToProps)(Header);

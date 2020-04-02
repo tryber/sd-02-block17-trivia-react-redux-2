@@ -21,7 +21,11 @@ const mapStateToProps = ({ loadReducer: { dataMock } }) => ({
 });
 
 Game.propTypes = {
-  dataMock: PropTypes.array,
+  dataMock: PropTypes.arrayOf(PropTypes.object),
+};
+
+Game.defaultProps = {
+  dataMock: [],
 };
 
 export default connect(mapStateToProps)(Game);

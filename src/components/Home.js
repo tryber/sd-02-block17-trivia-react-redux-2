@@ -72,10 +72,6 @@ Home.propTypes = {
   name: propTypes.string.isRequired,
   gravatarEmail: propTypes.string.isRequired,
   handleChange: propTypes.func.isRequired,
-  player: propTypes.shape({
-    name: propTypes.string.isRequired,
-    gravatarEmail: propTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

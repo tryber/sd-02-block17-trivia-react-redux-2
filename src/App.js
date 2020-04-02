@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Home from './components/Home';
 import Game from './components/Game';
+import propTypes from 'prop-types';
 import Feedback from './components/Feedback';
 import Ranking from './components/Ranking';
 import Settings from './components/Settings';
@@ -11,16 +12,17 @@ import './App.css';
 class App extends Component {
 
   componentDidMount() {
-    const { player } = this.props;
+    const { name } = this.props;
+    console.log(name)
     // const questions = 'api.php?amount=5';
     // returnTriviaAPI(questions);
-    localStorage.setItem('player', JSON.stringify(player));
+    localStorage.setItem('player', JSON.stringify(name));
   }
 
   componentDidUpdate(prevProps) {
-    const { player } = this.props;
-    if (prevProps.player !== player) {
-      localStorage.setItem('player', JSON.stringify(player));
+    const { name } = this.props;
+    if (prevProps.name !== name) {
+      localStorage.setItem('player', JSON.stringify(name));
     }
   }
 
@@ -45,3 +47,11 @@ const mapStateToProps = ({
   });
 
 export default connect(mapStateToProps)(App);
+
+App.propTypes = {
+  name: propTypes.string,
+};
+
+App.defaultpropTypes ={
+  name: undefined,
+}

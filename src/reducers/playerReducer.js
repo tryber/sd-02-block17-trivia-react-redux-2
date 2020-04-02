@@ -7,7 +7,7 @@ const playerState = {
   gravatarEmail: '',
 };
 
-const userReducer = (state = playerState, action) => {
+const playerReducer = (state = playerState, action) => {
   switch (action.type) {
     case types.CHANGE_USER_DATA:
       return {
@@ -21,4 +21,4 @@ const userReducer = (state = playerState, action) => {
   }
 };
 
-export default userReducer;
+export default playerReducer;

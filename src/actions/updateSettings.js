@@ -3,7 +3,7 @@ import * as types from './actionTypes';
 function updateSettingsCategories(settings) {
   const { category, difficulty, type } = settings;
   return {
-    type: types.CHANGE_CATEGORY,
+    type: types.CHANGE_SETTINGS,
     settings: [
       category,
       difficulty,

@@ -1,4 +1,4 @@
-import * as types from '../actions/actionTypes';
+import * as types from './actionTypes';
 import getEndPointTrivia from '../service/triviaAPI';
 
 function apiRequest() {
@@ -9,8 +9,8 @@ function apiRequest() {
 
 function apiSuccess(infos) {
   return {
-    type: types.LOAD_CATEGORIES,
-    category: infos,
+    type: types.LOAD_API,
+    data: infos,
   };
 }
 

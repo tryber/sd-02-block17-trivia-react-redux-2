@@ -9,6 +9,7 @@ const initialState = {
   ],
   isLoading: false,
   error: '',
+  errorCategory: '',
   settings: [],
 };
 
@@ -59,7 +60,9 @@ export default function reducer(state = initialState, action) {
       return { ...state, isLoading: false, error: action.error };
     case types.LOAD_CATEGORIES:
       return loadCategory(state, action);
-    case types.CHANGE_CATEGORY:
+    case types.FAIL_CATEGORIES:
+      return { ...state, errorCategory: action.errorCategory };
+    case types.CHANGE_SETTINGS:
       return updateSettings(state, action);
     default:
       return state;

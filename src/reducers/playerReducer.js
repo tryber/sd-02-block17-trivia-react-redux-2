@@ -17,7 +17,11 @@ const playerReducer = (state = playerState, action) => {
     case types.CLEAR_USER_DATA:
       return playerState;
     case 'CHANGE_PLACAR':
-      return { ...state, assertions: state.assertions + 1, score: state.score + 10 };
+      return {
+        ...state,
+        assertions: state.assertions + 1,
+        score: state.score + 10 + action.time * action.difficulty,
+      };
     default:
       return state;
   }

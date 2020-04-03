@@ -11,6 +11,7 @@ class EachQuestion extends Component {
     this.state = {
       foiRespondido: false,
       arrayAlternativas: [],
+      tempo: 30,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -89,12 +90,19 @@ class EachQuestion extends Component {
   //   this.setState({ arrayAlternativas });
 
     this.geraAlternativasMisturadas();
+    // const { tempo } = this.state;
+    // setInterval(
+    //   () => this.setState((state) => ({ tempo: state.tempo - 1 })),
+    //   1000,
+    // );
+    this.timer();
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.pergunta !== this.props.pergunta) {
       this.geraAlternativasMisturadas();
-      this.setState({ foiRespondido: false });
+      // clearInterval();
+      this.timer();
     }
   }
 
@@ -121,10 +129,21 @@ class EachQuestion extends Component {
       indexNovaAlternativa = Math.round(Math.random() * (index + 1));
       arrayAlternativas.splice(indexNovaAlternativa, 0, incorrectAnswers[index]);
     });
-    this.setState({ arrayAlternativas });
+    this.setState({ arrayAlternativas, foiRespondido: false });
+  }
+
+  calculaPeso() {
+    const { pergunta: { difficulty } } = this.props;
+    switch(difficulty) {
+      case 'easy': return 1;
+      case 'medium': return 2;
+      case 'hard': return 3;
+      default: return 0;
+    }
   }
 
   handleClick(event) {
+    clearInterval(this.intervalo);
     this.setState({ foiRespondido: true });
 
     // const { dataMock, alteraPlacar } = this.props;
@@ -137,8 +156,9 @@ class EachQuestion extends Component {
       callbackFeedback,
     } = this.props;
     const { value } = event.target;
+    const { tempo } = this.state;
     if (value === correctAnswer) {
-      alteraPlacar();
+      alteraPlacar(this.calculaPeso(), tempo);
     }
 
     if (indexPergunta !== 1) {
@@ -146,6 +166,31 @@ class EachQuestion extends Component {
     } else {
       setTimeout(callbackFeedback, 2000);
     }
+  }
+
+  timer() {
+    this.setState({ tempo: 30 });
+    this.intervalo = setInterval(
+      () => this.setState((state) => ({ tempo: state.tempo - 1 })),
+      1000,
+    );
+    // const { foiRespondido } = this.state;
+    // if (!foiRespondido) {
+    //   clearInterval(this.intervalo);
+    // }
+  }
+
+  renderizaOTempo() {
+    const { tempo } = this.state;
+    // setInterval(
+    //   () => this.setState((state) => ({ tempo: state.tempo - 1 })),
+    //   1000,
+    // );
+    return (
+      <div>
+        <p>{`Tempo: ${tempo}`}</p>
+      </div>
+    );
   }
 
   renderizaAPergunta() {
@@ -202,6 +247,7 @@ class EachQuestion extends Component {
       <div>
         {/* <Header /> */}
         {this.renderizaAPergunta()}
+        {this.renderizaOTempo()}
       </div>
     );
   }
@@ -218,7 +264,11 @@ const mapStateToProps = ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  alteraPlacar: () => dispatch({ type: 'CHANGE_PLACAR' }),
+  alteraPlacar: (difficulty, time) => dispatch({
+    type: 'CHANGE_PLACAR',
+    difficulty,
+    time,
+  }),
 });
 
 EachQuestion.propTypes = {

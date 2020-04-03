@@ -91,6 +91,13 @@ class EachQuestion extends Component {
     this.geraAlternativasMisturadas();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.pergunta !== this.props.pergunta) {
+      this.geraAlternativasMisturadas();
+      this.setState({ foiRespondido: false });
+    }
+  }
+
   setaClasse(alternativa) {
     const { foiRespondido } = this.state;
     // const { dataMock } = this.props;
@@ -134,7 +141,7 @@ class EachQuestion extends Component {
       alteraPlacar();
     }
 
-    if (indexPergunta > 0) {
+    if (indexPergunta !== 1) {
       callbackProximaPergunta();
     } else {
       setTimeout(callbackFeedback, 2000);

@@ -2,46 +2,37 @@ import * as types from '../actions/actionTypes';
 
 const initialState = {
   data: [],
-  dataMock: [
-    {
-      category: 'Entertainment: Video Games',
-      type: 'multiple',
-      difficulty: 'easy',
-      question: 'What is the first weapon you acquire in Half-Life?',
-      correct_answer: 'A crowbar',
-      incorrect_answers: [
-        'A pistol',
-        'The H.E.V suit',
-        'Your fists',
-      ],
-    },
-  ],
+  dataMock: [],
   player: [
     { name: {} },
-    { token: '' },
   ],
   isLoading: false,
   error: '',
   errorCategory: '',
-  settings: [],
+  settings: {
+    category: '',
+    difficulty: '',
+    type: '',
+  },
 };
 
 function loadAPI(state, action) {
   return {
     ...state,
     data: action.data,
-    // dataMock: action.dataMock,
+    dataMock: action.dataMock,
     isLoading: false,
   };
 }
 
 function loadToken(state, action) {
+  const token = 'token';
   return {
     ...state,
     player: [
-      { token: action.token },
+      ...state.player,
+      action.token,
     ],
-    isLoading: false,
   };
 }
 

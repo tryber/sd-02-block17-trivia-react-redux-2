@@ -11,6 +11,14 @@ function apiSuccess(infos) {
   return {
     type: types.LOAD_API,
     data: infos,
+    dataMock: infos,
+  };
+}
+
+function chargeToken(token) {
+  return {
+    type: types.LOAD_USER,
+    token: { token },
   };
 }
 
@@ -21,11 +29,12 @@ function apiFailure(error) {
   };
 }
 
-const loadQuestions = (question) => (
+const loadQuestions = (finalLink, token) => (
   (dispatch) => {
     dispatch(apiRequest());
+    dispatch(chargeToken(token));
     return (
-      getEndPointTrivia(question).then(
+      getEndPointTrivia(finalLink).then(
         (infos) => dispatch(apiSuccess(infos)),
         (error) => dispatch(apiFailure(error.message)),
       )

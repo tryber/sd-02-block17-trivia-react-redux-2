@@ -26,7 +26,6 @@ function loadAPI(state, action) {
 }
 
 function loadToken(state, action) {
-  const token = 'token';
   return {
     ...state,
     player: [

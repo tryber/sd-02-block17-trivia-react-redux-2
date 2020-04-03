@@ -103,6 +103,7 @@ Home.propTypes = {
   name: propTypes.string.isRequired,
   gravatarEmail: propTypes.string.isRequired,
   handleChange: propTypes.func.isRequired,
+  settings: propTypes.instanceOf(Object).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -56,7 +56,7 @@ class Home extends Component {
     const questions = 'api.php?amount=5';
     const finalLink = `${questions}${link}&token=${token.token}`;
     returnTriviaAPI(finalLink, token.token);
-    //this.setState({ shouldRedirect: true });
+    // this.setState({ shouldRedirect: true });
   }
 
   render() {

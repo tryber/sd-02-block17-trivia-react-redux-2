@@ -28,7 +28,7 @@ class Game extends Component {
     setTimeout(
     () => this.setState({ shouldRedirect: true }),
     2000,
-    )
+    );
   }
 
   renderNextQuestion() {

@@ -14,6 +14,7 @@ class EachQuestion extends Component {
       tempo: 5,
     };
     this.handleClick = this.handleClick.bind(this);
+    this.acaoACadaSegundo = this.acaoACadaSegundo.bind(this);
   }
 
   // static renderHeader() {
@@ -169,25 +170,25 @@ class EachQuestion extends Component {
     }
   }
 
+  acaoACadaSegundo() {
+    const { tempo } = this.state;
+    const { indexPergunta, callbackProximaPergunta, callbackFeedback } = this.props;
+    if (tempo > 0) {
+      this.setState((state) => ({ tempo: state.tempo - 1 }));
+      if (tempo === 1 && indexPergunta < 1) {
+        callbackProximaPergunta();
+        this.setState({ foiRespondido: true });
+      } else if (tempo === 1) {
+        callbackFeedback();
+        this.setState({ foiRespondido: true });
+      }
+    }
+  }
+
   timer() {
     this.setState({ tempo: 5 });
-    const { indexPergunta, callbackProximaPergunta, callbackFeedback } = this.props;
     this.intervalo = setInterval(
-      () => {
-        const { tempo } = this.state;
-        if (tempo > 0) {
-          console.log(tempo);
-          this.setState((state) => ({ tempo: state.tempo - 1 }))
-          console.log(tempo);
-          if (tempo === 1 && indexPergunta < 1) {
-            callbackProximaPergunta();
-            this.setState({ foiRespondido: true });
-          } else if (tempo === 1) {
-            callbackFeedback();
-            this.setState({ foiRespondido: true });
-          }
-        }
-      },
+      this.acaoACadaSegundo,
       1000,
     );
     // const { foiRespondido } = this.state;
@@ -259,8 +260,8 @@ class EachQuestion extends Component {
   }
 
   render() {
-    const { tempo } = this.state;
-    const { callbackProximaPergunta, indexPergunta, callbackFeedback } = this.props;
+    // const { tempo } = this.state;
+    // const { callbackProximaPergunta, indexPergunta, callbackFeedback } = this.props;
     // if (tempo === 0 && indexPergunta !== 1) {
     //   clearInterval(this.intervalo);
     //   this.setState({ foiRespondido: true });

@@ -20,7 +20,7 @@ const playerReducer = (state = playerState, action) => {
       return {
         ...state,
         assertions: state.assertions + 1,
-        score: state.score + 10 + action.time * action.difficulty,
+        score: state.score + 10 + (action.time * action.difficulty),
       };
     default:
       return state;

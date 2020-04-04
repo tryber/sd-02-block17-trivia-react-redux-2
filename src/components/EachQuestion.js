@@ -11,7 +11,7 @@ class EachQuestion extends Component {
     this.state = {
       foiRespondido: false,
       arrayAlternativas: [],
-      tempo: 30,
+      tempo: 5,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -102,6 +102,7 @@ class EachQuestion extends Component {
     if (prevProps.pergunta !== this.props.pergunta) {
       this.geraAlternativasMisturadas();
       // clearInterval();
+      clearInterval(this.intervalo);
       this.timer();
     }
   }
@@ -134,7 +135,7 @@ class EachQuestion extends Component {
 
   calculaPeso() {
     const { pergunta: { difficulty } } = this.props;
-    switch(difficulty) {
+    switch (difficulty) {
       case 'easy': return 1;
       case 'medium': return 2;
       case 'hard': return 3;
@@ -164,14 +165,29 @@ class EachQuestion extends Component {
     if (indexPergunta !== 1) {
       callbackProximaPergunta();
     } else {
-      setTimeout(callbackFeedback, 2000);
+      callbackFeedback();
     }
   }
 
   timer() {
-    this.setState({ tempo: 30 });
+    this.setState({ tempo: 5 });
+    const { indexPergunta, callbackProximaPergunta, callbackFeedback } = this.props;
     this.intervalo = setInterval(
-      () => this.setState((state) => ({ tempo: state.tempo - 1 })),
+      () => {
+        const { tempo } = this.state;
+        if (tempo > 0) {
+          console.log(tempo);
+          this.setState((state) => ({ tempo: state.tempo - 1 }))
+          console.log(tempo);
+          if (tempo === 1 && indexPergunta < 1) {
+            callbackProximaPergunta();
+            this.setState({ foiRespondido: true });
+          } else if (tempo === 1) {
+            callbackFeedback();
+            this.setState({ foiRespondido: true });
+          }
+        }
+      },
       1000,
     );
     // const { foiRespondido } = this.state;
@@ -243,9 +259,28 @@ class EachQuestion extends Component {
   }
 
   render() {
+    const { tempo } = this.state;
+    const { callbackProximaPergunta, indexPergunta, callbackFeedback } = this.props;
+    // if (tempo === 0 && indexPergunta !== 1) {
+    //   clearInterval(this.intervalo);
+    //   this.setState({ foiRespondido: true });
+    //   callbackProximaPergunta();
+    // } else if (tempo === 0) {
+    //   setTimeout(callbackFeedback, 1000);
+    // }
+    // if (tempo === 0 && indexPergunta !== 1) {
+    //   clearInterval(this.intervalo);
+    //   setTimeout(
+    //     () => this.setState({ tempo: 30 }),
+    //     1000,
+    //   );
+    //   setTimeout(callbackRenderNextQuestion, 1000);
+    // } else if (tempo === 0 && indexPergunta === 1) {
+    //   clearInterval(this.intervalo);
+    //   setTimeout(callbackFeedback, 1000);
+    // }
     return (
       <div>
-        {/* <Header /> */}
         {this.renderizaAPergunta()}
         {this.renderizaOTempo()}
       </div>

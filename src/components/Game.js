@@ -15,7 +15,7 @@ class Game extends Component {
     };
     this.callbackProximaPergunta = this.callbackProximaPergunta.bind(this);
     this.callbackFeedback = this.callbackFeedback.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.renderNextQuestion = this.renderNextQuestion.bind(this);
   }
 
   callbackProximaPergunta() {
@@ -25,10 +25,13 @@ class Game extends Component {
 
   callbackFeedback() {
     // this.setState((state) => ({ indexPergunta: state.indexPergunta + 1 }));
-    this.setState({ shouldRedirect: true });
+    setTimeout(
+    () => this.setState({ shouldRedirect: true }),
+    2000,
+    )
   }
 
-  handleClick() {
+  renderNextQuestion() {
     this.setState((state) => ({
       indexPergunta: state.indexPergunta + 1,
       shouldRenderNextButton: false,
@@ -47,12 +50,13 @@ class Game extends Component {
         <EachQuestion
           callbackProximaPergunta={this.callbackProximaPergunta}
           callbackFeedback={this.callbackFeedback}
+          callbackRenderNextQuestion={this.renderNextQuestion}
           pergunta={dataMock[indexPergunta]}
           indexPergunta={indexPergunta}
         />
         {shouldRenderNextButton &&
           <button
-            onClick={this.handleClick}
+            onClick={this.renderNextQuestion}
           >
             PRÓXIMA
           </button>

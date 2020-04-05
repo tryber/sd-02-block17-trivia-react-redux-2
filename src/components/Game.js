@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Loading from './Loading';
 import Header from './Header';
 import EachQuestion from './EachQuestion';
+import playerCleanupAction from '../actions/playerCleanupAction';
 import './style/Game.css';
 
 class Game extends Component {
@@ -44,11 +45,15 @@ class Game extends Component {
   }
 
   render() {
-    const { data, isLoading, response } = this.props;
+    const { data, isLoading, response, playerClear } = this.props;
     const { indexPergunta, shouldRenderNextButton, shouldRedirect } = this.state;
     if (response === 4) {
       alert('A combinação escolhida nas configurações não retorna nenhuma pergunta da API, você será redirecionado para a tela de configurações');
       return <Redirect to="/settings" />;
+    }
+    if (response === 3) {
+      playerClear();
+      return <Redirect to="/" />;
     }
     if (isLoading) return (<div><Loading /></div>);
     if (shouldRedirect) return <Redirect to="/feedback" />;
@@ -82,6 +87,10 @@ const mapStateToProps = ({ loadReducer: { data, isLoading, response, token } }) 
   data, isLoading, response, token,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  playerClear: () => dispatch(playerCleanupAction()),
+});
+
 Game.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   isLoading: PropTypes.bool.isRequired,
@@ -94,4 +103,4 @@ Game.defaultProps = {
   response: 0,
 };
 
-export default connect(mapStateToProps)(Game);
+export default connect(mapStateToProps, mapDispatchToProps)(Game);

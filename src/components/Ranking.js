@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
 import imageLink from '../service/hashConverter';
+import { render } from '@testing-library/react';
 
-function Ranking() {
+class Ranking extends Component {
+  render() {
   const { gravatarEmail } = this.props;
   const ranking = JSON.parse(localStorage.getItem('ranking'));
   const playersScore = ranking.map((player) => player.score);
@@ -19,15 +21,15 @@ function Ranking() {
   ));
 
   return (
-    <div>
-      <h1>Ranking</h1>
-      {leaderboard}
-      <Link to="/">
-        <button type="button">Jogar Novamente</button>
-      </Link>
-    </div>
-  );
-}
+      <div>
+        <h1>Ranking</h1>
+        {leaderboard}
+        <Link to="/">
+          <button type="button">Jogar Novamente</button>
+        </Link>
+      </div>
+    )};
+};
 
 const mapStateToProps = ({ player: { gravatarEmail } }) => ({
   gravatarEmail

@@ -20,8 +20,8 @@ function loadAPI(state, action) {
   return {
     ...state,
     data: action.data,
-    dataMock: action.dataMock,
-    isLoading: false,
+    response: action.response,
+    isLoading: action.isLoading,
   };
 }
 
@@ -47,6 +47,7 @@ function loadCategory(state, action) {
 function updateSettings(state, action) {
   return {
     ...state,
+    response: action.response,
     settings: action.settings,
   };
 }

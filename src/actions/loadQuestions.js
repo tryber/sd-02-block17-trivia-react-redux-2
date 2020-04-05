@@ -1,5 +1,6 @@
 import * as types from './actionTypes';
 import getEndPointTrivia from '../service/triviaAPI';
+import getTokenTriviaAPI from '../service/tokenAPI';
 
 function apiRequest() {
   return {
@@ -10,8 +11,9 @@ function apiRequest() {
 function apiSuccess(infos) {
   return {
     type: types.LOAD_API,
-    data: infos,
-    dataMock: infos,
+    data: infos.results,
+    response: infos.response_code,
+    isLoading: false,
   };
 }
 
@@ -29,9 +31,11 @@ function apiFailure(error) {
   };
 }
 
-const loadQuestions = (finalLink, token) => (
-  (dispatch) => {
+const loadQuestions = (finalLink) => (
+  async (dispatch) => {
     dispatch(apiRequest());
+    const token = await getTokenTriviaAPI();
+    finalLink = `${finalLink}&token=${token.token}`;
     dispatch(chargeToken(token));
     return (
       getEndPointTrivia(finalLink).then(

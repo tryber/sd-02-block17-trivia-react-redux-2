@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import imageLink from '../service/hashConverter';
@@ -17,9 +18,11 @@ class Header extends Component {
         </div>
         <div className="header-right">
           <p data-testid="header-score">{`Pontos: ${score}`}</p>
-          {configButton && <div className="config-button">
+          {configButton && <Link to="/Settings">
+          <div className="config-button">
             <button data-testid="config-button" />
-          </div> }
+          </div>
+        </Link> }
         </div>
       </header>
     );

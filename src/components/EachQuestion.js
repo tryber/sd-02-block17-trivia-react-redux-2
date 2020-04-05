@@ -177,6 +177,7 @@ class EachQuestion extends Component {
         <div className="alternatives">
           {arrayAlternativas.map((item) => (
             <button
+              key={item}
               className={this.setaClasse(item)}
               value={item}
               onClick={this.handleClick}

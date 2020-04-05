@@ -37,26 +37,25 @@ class Home extends Component {
   linkAPI() {
     const { settings: { category, difficulty, type } } = this.props;
     let finalDoLink = '';
-    if (category.length > 0) {
+    if (category.length > 0 && category !== 'any') {
       finalDoLink = `${finalDoLink}&category=${category}`;
     }
-    if (type.length > 0) {
+    if (type.length > 0 && type !== 'any') {
       finalDoLink = `${finalDoLink}&type=${type}`;
     }
-    if (difficulty.length > 0) {
+    if (difficulty.length > 0 && difficulty !== 'any') {
       finalDoLink = `${finalDoLink}&difficulty=${difficulty}`;
     }
     return finalDoLink;
   }
 
-  async requisitionsToGame() {
+  requisitionsToGame() {
     const { returnTriviaAPI } = this.props;
-    const token = await getTokenTriviaAPI();
     const link = this.linkAPI();
     const questions = 'api.php?amount=5';
-    const finalLink = `${questions}${link}&token=${token.token}`;
-    returnTriviaAPI(finalLink, token.token);
-    // this.setState({ shouldRedirect: true });
+    const finalLink = `${questions}${link}`;
+    returnTriviaAPI(finalLink);
+    this.setState({ shouldRedirect: true });
   }
 
   render() {
@@ -90,13 +89,13 @@ class Home extends Component {
 
 const mapStateToProps = ({
   player: { name, gravatarEmail },
-  loadReducer: { isLoading, error, settings } }) => ({
-    name, gravatarEmail, isLoading, error, settings,
+  loadReducer: { isLoading, error, settings, data } }) => ({
+    name, gravatarEmail, isLoading, error, settings, data
   });
 
 const mapDispatchToProps = (dispatch) => ({
   handleChange: (event) => dispatch(changeUser(event.target)),
-  returnTriviaAPI: (finalLink, token) => dispatch(loadQuestions(finalLink, token)),
+  returnTriviaAPI: (finalLink) => dispatch(loadQuestions(finalLink)),
 });
 
 Home.propTypes = {

@@ -4,6 +4,7 @@ function updateSettingsCategories(settings) {
   const { category, difficulty, type } = settings;
   return {
     type: types.CHANGE_SETTINGS,
+    response: 0,
     settings: {
       category,
       difficulty,

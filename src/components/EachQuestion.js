@@ -11,7 +11,7 @@ class EachQuestion extends Component {
     this.state = {
       foiRespondido: false,
       arrayAlternativas: [],
-      tempo: 5,
+      tempo: 30,
     };
     this.handleClick = this.handleClick.bind(this);
     this.acaoACadaSegundo = this.acaoACadaSegundo.bind(this);
@@ -116,7 +116,7 @@ class EachQuestion extends Component {
     if (foiRespondido) {
       return (alternativa === correctAnswer) ? 'correct-answer' : 'incorrect-answer';
     }
-    return 'alternative-button';
+    return '';
   }
 
   geraAlternativasMisturadas() {
@@ -186,7 +186,7 @@ class EachQuestion extends Component {
   }
 
   timer() {
-    this.setState({ tempo: 5 });
+    this.setState({ tempo: 30 });
     this.intervalo = setInterval(
       this.acaoACadaSegundo,
       1000,
@@ -204,7 +204,7 @@ class EachQuestion extends Component {
     //   1000,
     // );
     return (
-      <div>
+      <div className="time">
         <p>{`Tempo: ${tempo}`}</p>
       </div>
     );
@@ -235,21 +235,22 @@ class EachQuestion extends Component {
     const { arrayAlternativas, foiRespondido } = this.state;
     // const { pergunta } = this.props;
     // const primeiraPergunta = dataMock[0];
-    const { pergunta: { category, question } } = this.props;
+    const { pergunta: { category, question, correct_answer: correctAnswer } } = this.props;
 
     return (
-      <div>
+      <div className="each-question">
         <div className="question-box">
           <h3>{category}</h3>
-          <p>{question}</p>
+          <p data-testid="question-text">{question}</p>
         </div>
         <div className="alternatives">
-          {arrayAlternativas.map((item) => (
+          {arrayAlternativas.map((item, index) => (
             <button
-              className={this.setaClasse(item)}
+              className={`answer ${this.setaClasse(item)}`}
               value={item}
               onClick={this.handleClick}
               disabled={foiRespondido}
+              data-testid={(item === correctAnswer) ? 'correct-answer' : `wrong-answer-${index}`}
             >
               {item}
             </button>
@@ -281,7 +282,7 @@ class EachQuestion extends Component {
     //   setTimeout(callbackFeedback, 1000);
     // }
     return (
-      <div>
+      <div className="pergunta-e-tempo">
         {this.renderizaAPergunta()}
         {this.renderizaOTempo()}
       </div>

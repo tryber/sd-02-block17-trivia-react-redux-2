@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Header from './Header';
 import EachQuestion from './EachQuestion';
+import './style/Game.css';
 
 class Game extends Component {
   constructor(props) {
@@ -55,11 +56,14 @@ class Game extends Component {
           indexPergunta={indexPergunta}
         />
         {shouldRenderNextButton &&
-          <button
-            onClick={this.renderNextQuestion}
-          >
-            PRÓXIMA
-          </button>
+          <div className="proxima-pergunta">
+            <button
+              onClick={this.renderNextQuestion}
+              className="proxima-pergunta"
+            >
+              PRÓXIMA
+            </button>
+          </div>
         }
       </div>
     );

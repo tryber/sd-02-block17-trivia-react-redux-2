@@ -10,6 +10,7 @@ class Feedback extends Component {
     super(props);
     this.state = { shouldRedirectToRanking: false, shouldRedirectToHome: false };
     this.restartGame = this.restartGame.bind(this);
+    this.rankLocalStorage = this.rankLocalStorage.bind(this);
   }
 
   restartGame() {
@@ -19,9 +20,9 @@ class Feedback extends Component {
   }
 
   rankLocalStorage() {
-    const { score, name, hash } = this.props;
+    const { score, name } = this.props;
     const rank = JSON.parse(localStorage.getItem('ranking')) || [];
-    const playerData = { name, score, picture: hash };
+    const playerData = { name, score };
     rank.push(playerData);
     localStorage.setItem('ranking', JSON.stringify(rank));
   }
@@ -37,7 +38,8 @@ class Feedback extends Component {
         <p data-testid="feedback-total-score">{`Um total de ${score} pontos`}</p>
         <div className="buttons">
           <button
-            onClick={() => this.setState({ shouldRedirectToRanking: true })}
+            // onClick={() => this.setState({ shouldRedirectToRanking: true })}
+            onClick={this.rankLocalStorage}
             className="btn-ranking"
           >
             VER RANKING
@@ -63,7 +65,6 @@ class Feedback extends Component {
       <div>
         <Header configButton />
         {this.renderSection()}
-        {this.rankLocalStorage}
       </div>
     );
   }

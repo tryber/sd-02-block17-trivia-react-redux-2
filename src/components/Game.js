@@ -56,10 +56,10 @@ class Game extends Component {
           indexPergunta={indexPergunta}
         />
         {shouldRenderNextButton &&
-          <div className="proxima-pergunta">
+          <div className="div-proxima-pergunta">
             <button
               onClick={this.renderNextQuestion}
-              className="proxima-pergunta"
+              className="button-proxima-pergunta"
             >
               PRÓXIMA
             </button>

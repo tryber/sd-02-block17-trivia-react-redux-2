@@ -114,7 +114,7 @@ class EachQuestion extends Component {
     // const primeiraPergunta = dataMock[0];
     const { pergunta: { correct_answer: correctAnswer } } = this.props;
     if (foiRespondido) {
-      return (alternativa === correctAnswer) ? 'correct-answer' : 'incorrect-answer';
+      return (alternativa === correctAnswer) ? ' correct-answer' : ' incorrect-answer';
     }
     return '';
   }
@@ -246,7 +246,7 @@ class EachQuestion extends Component {
         <div className="alternatives">
           {arrayAlternativas.map((item, index) => (
             <button
-              className={`answer ${this.setaClasse(item)}`}
+              className={`answer${this.setaClasse(item)}`}
               value={item}
               onClick={this.handleClick}
               disabled={foiRespondido}

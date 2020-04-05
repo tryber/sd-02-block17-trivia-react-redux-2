@@ -40,7 +40,7 @@ header {
   width: 40%;
 }
 
-.question-box.category {
+.category {
   background-color: #ddd;
   padding: 10px;
 }
@@ -76,12 +76,12 @@ header {
   margin: 10px 50px 0;
 }
 
-div.proxima-pergunta {
+.div-proxima-pergunta {
   display: flex;
   justify-content: center;
 }
 
-button.proxima-pergunta {
+.button-proxima-pergunta {
   background-color: #23fc00;
   font-size: 40px;
   height: 70px;

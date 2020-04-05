@@ -15,10 +15,10 @@ function updateSettingsCategories(settings) {
 }
 
 const updateSettings = (settings) => (
-  (dispatch) => (
-    dispatch(updateSettingsCategories(settings)),
-    dispatch(playerCleanupAction())
-  )
+  (dispatch) => {
+    dispatch(updateSettingsCategories(settings));
+    return dispatch(playerCleanupAction());
+  }
 );
 
 export default updateSettings;

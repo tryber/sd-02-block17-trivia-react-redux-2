@@ -35,10 +35,10 @@ const loadQuestions = (finalLink) => (
   async (dispatch) => {
     dispatch(apiRequest());
     const results = await getTokenTriviaAPI();
-    finalLink = (`${finalLink}&token=${results.token}`);
+    const newLink = (`${finalLink}&token=${results.token}`);
     dispatch(chargeToken(results));
     return (
-      getEndPointTrivia(finalLink).then(
+      getEndPointTrivia(newLink).then(
         (infos) => dispatch(apiSuccess(infos)),
         (error) => dispatch(apiFailure(error.message)),
       )

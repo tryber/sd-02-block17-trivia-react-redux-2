@@ -86,6 +86,7 @@ Game.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   isLoading: PropTypes.bool.isRequired,
   response: PropTypes.number,
+  token: PropTypes.string.isRequired,
 };
 
 Game.defaultProps = {

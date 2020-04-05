@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Header from './Header';
 import EachQuestion from './EachQuestion';
+import './style/Game.css';
 
 class Game extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Game extends Component {
     };
     this.callbackProximaPergunta = this.callbackProximaPergunta.bind(this);
     this.callbackFeedback = this.callbackFeedback.bind(this);
+    this.renderNextQuestion = this.renderNextQuestion.bind(this);
   }
 
   callbackProximaPergunta() {
@@ -24,7 +26,17 @@ class Game extends Component {
 
   callbackFeedback() {
     // this.setState((state) => ({ indexPergunta: state.indexPergunta + 1 }));
-    this.setState({ shouldRedirect: true });
+    setTimeout(
+    () => this.setState({ shouldRedirect: true }),
+    2000,
+    );
+  }
+
+  renderNextQuestion() {
+    this.setState((state) => ({
+      indexPergunta: state.indexPergunta + 1,
+      shouldRenderNextButton: false,
+    }));
   }
 
   render() {
@@ -39,15 +51,19 @@ class Game extends Component {
         <EachQuestion
           callbackProximaPergunta={this.callbackProximaPergunta}
           callbackFeedback={this.callbackFeedback}
+          callbackRenderNextQuestion={this.renderNextQuestion}
           pergunta={dataMock[indexPergunta]}
           indexPergunta={indexPergunta}
         />
         {shouldRenderNextButton &&
-          <button
-            onClick={() => this.setState((state) => ({ indexPergunta: state.indexPergunta + 1 }))}
-          >
-            PRÓXIMA
-          </button>
+          <div className="div-proxima-pergunta">
+            <button
+              onClick={this.renderNextQuestion}
+              className="button-proxima-pergunta"
+            >
+              PRÓXIMA
+            </button>
+          </div>
         }
       </div>
     );

@@ -1,3 +1,7 @@
+/* * {
+  border: 1px solid red;
+} */
+
 .header-right {
   justify-content: space-around;
   width: 20%;
@@ -16,16 +20,70 @@ header {
   justify-content: space-between;
 }
 
-.alternative-button {
+.pergunta-e-tempo {
+  display: flex;
+  flex-direction: column;
+}
+
+.each-question {
+  display: flex;
+  font-size: 30px;
+  justify-content: space-between;
+  margin: 20px 50px 0;
+}
+
+.question-box {
   background-color: #c4c4c4;
+  height: 350px;
+  padding: 10px;
+  text-align: center;
+  width: 40%;
+}
+
+.category {
+  background-color: #ddd;
+  padding: 10px;
+}
+
+.alternatives {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+}
+
+.answer {
+  background-color: #c4c4c4;
+  font-size: 30px;
+  margin: 20px;
 }
 
 .correct-answer {
-  background-color: #c4c4c4;
   border: 3px solid green;
 }
 
 .incorrect-answer {
-  background-color: #c4c4c4;
   border: 3px solid red;
+}
+
+.time {
+  display: flex;
+}
+
+.time p {
+  color: red;
+  font-size: 30px;
+  margin: 10px 50px 0;
+}
+
+.div-proxima-pergunta {
+  display: flex;
+  justify-content: center;
+}
+
+.button-proxima-pergunta {
+  background-color: #23fc00;
+  font-size: 40px;
+  height: 70px;
+  width: 400px;
 }

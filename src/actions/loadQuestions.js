@@ -17,10 +17,10 @@ function apiSuccess(infos) {
   };
 }
 
-function chargeToken(token) {
+function chargeToken(results) {
   return {
     type: types.LOAD_USER,
-    token: { token },
+    token: results.token,
   };
 }
 
@@ -34,9 +34,9 @@ function apiFailure(error) {
 const loadQuestions = (finalLink) => (
   async (dispatch) => {
     dispatch(apiRequest());
-    const token = await getTokenTriviaAPI();
-    finalLink = (`${finalLink}&token=${token.token}`);
-    dispatch(chargeToken(token));
+    const results = await getTokenTriviaAPI();
+    finalLink = (`${finalLink}&token=${results.token}`);
+    dispatch(chargeToken(results));
     return (
       getEndPointTrivia(finalLink).then(
         (infos) => dispatch(apiSuccess(infos)),

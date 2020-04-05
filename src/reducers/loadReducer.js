@@ -6,6 +6,7 @@ const initialState = {
   player: [
     { name: {} },
   ],
+  token: '',
   isLoading: false,
   error: '',
   errorCategory: '',
@@ -28,10 +29,7 @@ function loadAPI(state, action) {
 function loadToken(state, action) {
   return {
     ...state,
-    player: [
-      ...state.player,
-      action.token,
-    ],
+    token: action.token,
   };
 }
 

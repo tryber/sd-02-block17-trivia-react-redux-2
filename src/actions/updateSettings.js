@@ -1,4 +1,5 @@
 import * as types from './actionTypes';
+import playerCleanupAction from '../actions/playerCleanupAction';
 
 function updateSettingsCategories(settings) {
   const { category, difficulty, type } = settings;
@@ -14,7 +15,10 @@ function updateSettingsCategories(settings) {
 }
 
 const updateSettings = (settings) => (
-  (dispatch) => dispatch(updateSettingsCategories(settings))
+  (dispatch) => (
+    dispatch(updateSettingsCategories(settings)),
+    dispatch(playerCleanupAction())
+  )
 );
 
 export default updateSettings;

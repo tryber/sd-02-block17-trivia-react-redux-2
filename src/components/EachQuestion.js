@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import Header from './Header';
-// import imageLink from '../service/hashConverter';
 import './style/Game.css';
 
 class EachQuestion extends Component {
@@ -17,92 +15,14 @@ class EachQuestion extends Component {
     this.acaoACadaSegundo = this.acaoACadaSegundo.bind(this);
   }
 
-  // static renderHeader() {
-  //   return (
-  //     <header className="header-left">
-  //       <div className="gravatar-image">
-  //           Imagem Aqui
-  //         <p data-testid="header-player-name">{'Jogador'}</p>
-  //       </div>
-  //       <div className="header-right">
-  //         <p data-testid="header-score">{'Pontos'}</p>
-  //       </div>
-  //     </header>
-  //   );
-  // }
-
-  // static renderGame() {
-  //   return (
-  //     <div>
-  //       <div>
-  //         Titulo Pergunta
-  //         <p>Pergunta</p>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
-  // render() {
-  //   return (
-  //     <div className="container-questions">
-  //       <div className="container-Header">
-  //         {this.renderHeader()}
-  //       </div>
-  //       <div className="container-page">
-  //         {this.renderGame()}
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
-  // renderHeader() {
-  //   const { gravatarEmail, name, score } = this.props;
-
-  //   return (
-  //     <header>
-  //       <div className="header-left">
-  //         <div className="gravatar-image">
-  //           <img alt="gravatar" src={imageLink(gravatarEmail)} />
-  //         </div>
-  //         <p data-testid="header-player-name">{`Jogador: ${name}`}</p>
-  //       </div>
-  //       <div className="header-right">
-  //         <p data-testid="header-score">{`Pontos: ${score}`}</p>
-  //         {/* <div className="config-button">
-  //           <button data-testid="config-button" />
-  //         </div> */}
-  //       </div>
-  //     </header>
-  //   );
-  // }
-
   componentDidMount() {
-  //   const { pergunta } = this.props;
-  //   // const primeiraPergunta = dataMock[0];
-  //   const { correct_answer: correctAnswer, incorrect_answers: incorrectAnswers } = pergunta;
-
-  //   const arrayAlternativas = [correctAnswer];
-  //   let indexNovaAlternativa;
-
-  //   incorrectAnswers.forEach((item, index) => {
-  //     indexNovaAlternativa = Math.round(Math.random() * (index + 1));
-  //     arrayAlternativas.splice(indexNovaAlternativa, 0, incorrectAnswers[index]);
-  //   });
-  //   this.setState({ arrayAlternativas });
-
     this.geraAlternativasMisturadas();
-    // const { tempo } = this.state;
-    // setInterval(
-    //   () => this.setState((state) => ({ tempo: state.tempo - 1 })),
-    //   1000,
-    // );
     this.timer();
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.pergunta !== this.props.pergunta) {
       this.geraAlternativasMisturadas();
-      // clearInterval();
       clearInterval(this.intervalo);
       this.timer();
     }
@@ -110,8 +30,6 @@ class EachQuestion extends Component {
 
   setaClasse(alternativa) {
     const { foiRespondido } = this.state;
-    // const { dataMock } = this.props;
-    // const primeiraPergunta = dataMock[0];
     const { pergunta: { correct_answer: correctAnswer } } = this.props;
     if (foiRespondido) {
       return (alternativa === correctAnswer) ? ' correct-answer' : ' incorrect-answer';
@@ -121,7 +39,6 @@ class EachQuestion extends Component {
 
   geraAlternativasMisturadas() {
     const { pergunta } = this.props;
-    // const primeiraPergunta = dataMock[0];
     const { correct_answer: correctAnswer, incorrect_answers: incorrectAnswers } = pergunta;
 
     const arrayAlternativas = [correctAnswer];
@@ -147,9 +64,6 @@ class EachQuestion extends Component {
   handleClick(event) {
     clearInterval(this.intervalo);
     this.setState({ foiRespondido: true });
-
-    // const { dataMock, alteraPlacar } = this.props;
-    // const primeiraPergunta = dataMock[0];
     const {
       pergunta: { correct_answer: correctAnswer },
       alteraPlacar,
@@ -163,7 +77,7 @@ class EachQuestion extends Component {
       alteraPlacar(this.calculaPeso(), tempo);
     }
 
-    if (indexPergunta !== 1) {
+    if (indexPergunta !== 4) {
       callbackProximaPergunta();
     } else {
       callbackFeedback();
@@ -175,7 +89,7 @@ class EachQuestion extends Component {
     const { indexPergunta, callbackProximaPergunta, callbackFeedback } = this.props;
     if (tempo > 0) {
       this.setState((state) => ({ tempo: state.tempo - 1 }));
-      if (tempo === 1 && indexPergunta < 1) {
+      if (tempo === 1 && indexPergunta < 4) {
         callbackProximaPergunta();
         this.setState({ foiRespondido: true });
       } else if (tempo === 1) {
@@ -191,18 +105,10 @@ class EachQuestion extends Component {
       this.acaoACadaSegundo,
       1000,
     );
-    // const { foiRespondido } = this.state;
-    // if (!foiRespondido) {
-    //   clearInterval(this.intervalo);
-    // }
   }
 
   renderizaOTempo() {
     const { tempo } = this.state;
-    // setInterval(
-    //   () => this.setState((state) => ({ tempo: state.tempo - 1 })),
-    //   1000,
-    // );
     return (
       <div className="time">
         <p>{`Tempo: ${tempo}`}</p>
@@ -211,30 +117,7 @@ class EachQuestion extends Component {
   }
 
   renderizaAPergunta() {
-    // const { dataMock } = this.props;
-    // const primeiraPergunta = dataMock[0];
-    // const { category, question, correct_answer, incorrect_answers } = primeiraPergunta;
-    // // const indexRespostaCorreta = Math.round(Math.random() * incorrect_answers.length);
-    // // const arrayAlternativas = [...incorrect_answers];
-    // // arrayAlternativas.splice(indexRespostaCorreta, 0, correct_answer);
-
-    // const arrayAlternativas = [correct_answer];
-    // let indexNovaAlternativa;
-
-    // incorrect_answers.forEach((item, index) => {
-    //   indexNovaAlternativa = Math.round(Math.random() * (index + 1));
-    //   arrayAlternativas.splice(indexNovaAlternativa, 0, incorrect_answers[index]);
-    // });
-    // let indexNovaAlternativa = Math.round(Math.random() * 1);
-    // arrayAlternativas.splice(indexNovaAlternativa, 0, incorrect_answers[0]);
-    // indexNovaAlternativa = Math.round(Math.random() * 2);
-    // arrayAlternativas.splice(indexNovaAlternativa, 0, incorrect_answers[1]);
-    // indexNovaAlternativa = Math.round(Math.random() * 3);
-    // arrayAlternativas.splice(indexNovaAlternativa, 0, incorrect_answers[2]);
-
     const { arrayAlternativas, foiRespondido } = this.state;
-    // const { pergunta } = this.props;
-    // const primeiraPergunta = dataMock[0];
     const { pergunta: { category, question, correct_answer: correctAnswer } } = this.props;
 
     return (
@@ -262,26 +145,6 @@ class EachQuestion extends Component {
   }
 
   render() {
-    // const { tempo } = this.state;
-    // const { callbackProximaPergunta, indexPergunta, callbackFeedback } = this.props;
-    // if (tempo === 0 && indexPergunta !== 1) {
-    //   clearInterval(this.intervalo);
-    //   this.setState({ foiRespondido: true });
-    //   callbackProximaPergunta();
-    // } else if (tempo === 0) {
-    //   setTimeout(callbackFeedback, 1000);
-    // }
-    // if (tempo === 0 && indexPergunta !== 1) {
-    //   clearInterval(this.intervalo);
-    //   setTimeout(
-    //     () => this.setState({ tempo: 30 }),
-    //     1000,
-    //   );
-    //   setTimeout(callbackRenderNextQuestion, 1000);
-    // } else if (tempo === 0 && indexPergunta === 1) {
-    //   clearInterval(this.intervalo);
-    //   setTimeout(callbackFeedback, 1000);
-    // }
     return (
       <div className="pergunta-e-tempo">
         {this.renderizaAPergunta()}

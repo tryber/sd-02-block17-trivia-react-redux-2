@@ -6,6 +6,6 @@ import store from './store'
 
 test('VAI COMEÇAR, A CYBER LUTAAAAA... ATÉ CAIR! NÃO PERCA O CONTROLE, E AO TOPO VAMOS SUBIR!', () => {
   const { getByText } = render(<Provider store={store}><App /> </Provider>);
-  const linkElement = getByText(/Iniciando/i, {selector: 'p'});
+  const linkElement = getByText(/JOGAR!/i, {selector: 'button'});
   expect(linkElement).toBeInTheDocument();
 });

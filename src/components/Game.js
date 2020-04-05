@@ -20,16 +20,19 @@ class Game extends Component {
     this.renderNextQuestion = this.renderNextQuestion.bind(this);
   }
 
+  componentDidUpdate() {
+    const { token } = this.props;
+    localStorage.setItem('token', token);
+  }
+
   callbackProximaPergunta() {
-    // this.setState((state) => ({ indexPergunta: state.indexPergunta + 1 }));
     this.setState({ shouldRenderNextButton: true });
   }
 
   callbackFeedback() {
-    // this.setState((state) => ({ indexPergunta: state.indexPergunta + 1 }));
     setTimeout(
     () => this.setState({ shouldRedirect: true }),
-    2000,
+    5000,
     );
   }
 
@@ -75,8 +78,8 @@ class Game extends Component {
   }
 }
 
-const mapStateToProps = ({ loadReducer: { data, isLoading, response } }) => ({
-  data, isLoading, response,
+const mapStateToProps = ({ loadReducer: { data, isLoading, response, token } }) => ({
+  data, isLoading, response, token,
 });
 
 Game.propTypes = {

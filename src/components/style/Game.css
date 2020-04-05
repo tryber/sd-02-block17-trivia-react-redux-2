@@ -26,35 +26,35 @@ header {
 }
 
 .each-question {
-  margin: 20px 50px 0 50px;
   display: flex;
-  justify-content: space-between;
   font-size: 30px;
+  justify-content: space-between;
+  margin: 20px 50px 0;
 }
 
 .question-box {
-  padding: 10px;
-  width: 40%;
   background-color: #c4c4c4;
   height: 350px;
+  padding: 10px;
   text-align: center;
+  width: 40%;
 }
 
-.question-box h3 {
-  background-color: #dddddd;
+.question-box.category {
+  background-color: #ddd;
   padding: 10px;
 }
 
 .alternatives {
   display: flex;
   flex-direction: column;
-  width: 50%;
   justify-content: center;
+  width: 50%;
 }
 
-button.answer {
-  font-size: 30px;
+.answer {
   background-color: #c4c4c4;
+  font-size: 30px;
   margin: 20px;
 }
 
@@ -82,8 +82,8 @@ div.proxima-pergunta {
 }
 
 button.proxima-pergunta {
-  font-size: 40px;
   background-color: #23fc00;
+  font-size: 40px;
   height: 70px;
   width: 400px;
 }

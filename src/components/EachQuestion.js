@@ -240,7 +240,7 @@ class EachQuestion extends Component {
     return (
       <div className="each-question">
         <div className="question-box">
-          <h3>{category}</h3>
+          <h3 className="category">{category}</h3>
           <p data-testid="question-text">{question}</p>
         </div>
         <div className="alternatives">

@@ -18,6 +18,14 @@ class Feedback extends Component {
     this.setState({ shouldRedirectToHome: true });
   }
 
+  rankLocalStorage() {
+    const { score, name, hash } = this.props;
+    const rank = JSON.parse(localStorage.getItem('ranking')) || [];
+    const playerData = { name, score, picture: hash };
+    rank.push(playerData);
+    localStorage.setItem('ranking', JSON.stringify(rank));
+  }
+
   renderSection() {
     const { score, assertions } = this.props;
     const message = assertions < 3 ? 'Podia ser melhor...' : 'Mandou bem!';
@@ -55,6 +63,7 @@ class Feedback extends Component {
       <div>
         <Header configButton />
         {this.renderSection()}
+        {this.rankLocalStorage}
       </div>
     );
   }

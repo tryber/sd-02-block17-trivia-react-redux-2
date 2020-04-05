@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Loading from './Loading';
 import Header from './Header';
 import EachQuestion from './EachQuestion';
 import './style/Game.css';
@@ -19,16 +20,19 @@ class Game extends Component {
     this.renderNextQuestion = this.renderNextQuestion.bind(this);
   }
 
+  componentDidUpdate() {
+    const { token } = this.props;
+    localStorage.setItem('token', token);
+  }
+
   callbackProximaPergunta() {
-    // this.setState((state) => ({ indexPergunta: state.indexPergunta + 1 }));
     this.setState({ shouldRenderNextButton: true });
   }
 
   callbackFeedback() {
-    // this.setState((state) => ({ indexPergunta: state.indexPergunta + 1 }));
     setTimeout(
     () => this.setState({ shouldRedirect: true }),
-    2000,
+    5000,
     );
   }
 
@@ -40,9 +44,13 @@ class Game extends Component {
   }
 
   render() {
-    const { dataMock } = this.props;
+    const { data, isLoading, response } = this.props;
     const { indexPergunta, shouldRenderNextButton, shouldRedirect } = this.state;
-
+    if (response === 4) {
+      alert('A combinação escolhida nas configurações não retorna nenhuma pergunta da API, você será redirecionado para a tela de configurações');
+      return <Redirect to="/settings" />;
+    }
+    if (isLoading) return (<div><Loading /></div>);
     if (shouldRedirect) return <Redirect to="/feedback" />;
 
     return (
@@ -51,8 +59,8 @@ class Game extends Component {
         <EachQuestion
           callbackProximaPergunta={this.callbackProximaPergunta}
           callbackFeedback={this.callbackFeedback}
+          pergunta={data[indexPergunta]}
           callbackRenderNextQuestion={this.renderNextQuestion}
-          pergunta={dataMock[indexPergunta]}
           indexPergunta={indexPergunta}
         />
         {shouldRenderNextButton &&
@@ -70,16 +78,20 @@ class Game extends Component {
   }
 }
 
-const mapStateToProps = ({ loadReducer: { dataMock } }) => ({
-  dataMock,
+const mapStateToProps = ({ loadReducer: { data, isLoading, response, token } }) => ({
+  data, isLoading, response, token,
 });
 
 Game.propTypes = {
-  dataMock: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.arrayOf(PropTypes.object),
+  isLoading: PropTypes.bool.isRequired,
+  response: PropTypes.number,
+  token: PropTypes.string.isRequired,
 };
 
 Game.defaultProps = {
-  dataMock: [],
+  data: [],
+  response: 0,
 };
 
 export default connect(mapStateToProps)(Game);

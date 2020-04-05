@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import imageLink from '../service/hashConverter';
+import { buttonSettings } from '../components/Home';
 
 class Header extends Component {
   render() {
@@ -17,9 +18,7 @@ class Header extends Component {
         </div>
         <div className="header-right">
           <p data-testid="header-score">{`Pontos: ${score}`}</p>
-          {configButton && <div className="config-button">
-            <button data-testid="config-button" />
-          </div> }
+          {configButton && buttonSettings() }
         </div>
       </header>
     );

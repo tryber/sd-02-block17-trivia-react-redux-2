@@ -1,19 +1,24 @@
 import * as types from './actionTypes';
+import playerCleanupAction from '../actions/playerCleanupAction';
 
 function updateSettingsCategories(settings) {
   const { category, difficulty, type } = settings;
   return {
     type: types.CHANGE_SETTINGS,
-    settings: [
+    response: 0,
+    settings: {
       category,
       difficulty,
       type,
-    ],
+    },
   };
 }
 
 const updateSettings = (settings) => (
-  (dispatch) => dispatch(updateSettingsCategories(settings))
+  (dispatch) => {
+    dispatch(updateSettingsCategories(settings));
+    return dispatch(playerCleanupAction());
+  }
 );
 
 export default updateSettings;

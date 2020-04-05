@@ -2,56 +2,34 @@ import * as types from '../actions/actionTypes';
 
 const initialState = {
   data: [],
-  dataMock: [
-    {
-      category: 'Entertainment: Video Games',
-      type: 'multiple',
-      difficulty: 'easy',
-      question: 'What is the first weapon you acquire in Half-Life?',
-      correct_answer: 'A crowbar',
-      incorrect_answers: [
-        'A pistol',
-        'The H.E.V suit',
-        'Your fists',
-      ],
-    },
-    {
-      category: 'Entertainment: Video Games',
-      type: 'boolean',
-      difficulty: 'hard',
-      question: 'TF2: Sentry rocket damage falloff is calculated based on the distance between the sentry and the enemy, not the engineer and the enemy',
-      correct_answer: 'False',
-      incorrect_answers: [
-        'True',
-      ],
-    },
-  ],
+  dataMock: [],
   player: [
     { name: {} },
-    { token: '' },
   ],
+  token: '',
   isLoading: false,
   error: '',
   errorCategory: '',
-  settings: [],
+  settings: {
+    category: '',
+    difficulty: '',
+    type: '',
+  },
 };
 
 function loadAPI(state, action) {
   return {
     ...state,
     data: action.data,
-    // dataMock: action.dataMock,
-    isLoading: false,
+    response: action.response,
+    isLoading: action.isLoading,
   };
 }
 
 function loadToken(state, action) {
   return {
     ...state,
-    player: [
-      { token: action.token },
-    ],
-    isLoading: false,
+    token: action.token,
   };
 }
 
@@ -67,6 +45,7 @@ function loadCategory(state, action) {
 function updateSettings(state, action) {
   return {
     ...state,
+    response: action.response,
     settings: action.settings,
   };
 }

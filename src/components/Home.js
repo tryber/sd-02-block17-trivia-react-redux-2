@@ -6,6 +6,16 @@ import changeUser from '../actions/changeUser';
 import loadQuestions from '../actions/loadQuestions';
 import './style/Home.css';
 
+export function buttonSettings() {
+  return (
+    <Link to="/Settings">
+      <div className="config-button">
+        <button data-testid="config-button" />
+      </div>
+    </Link>
+  );
+}
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -33,6 +43,30 @@ class Home extends Component {
     );
   }
 
+  linkAPI() {
+    const { settings: { category, difficulty, type } } = this.props;
+    let finalDoLink = '';
+    if (category.length > 0 && category !== 'any') {
+      finalDoLink = `${finalDoLink}&category=${category}`;
+    }
+    if (type.length > 0 && type !== 'any') {
+      finalDoLink = `${finalDoLink}&type=${type}`;
+    }
+    if (difficulty.length > 0 && difficulty !== 'any') {
+      finalDoLink = `${finalDoLink}&difficulty=${difficulty}`;
+    }
+    return finalDoLink;
+  }
+
+  requisitionsToGame() {
+    const { returnTriviaAPI } = this.props;
+    const link = this.linkAPI();
+    const questions = 'api.php?amount=5';
+    const finalLink = `${questions}${link}`;
+    returnTriviaAPI(finalLink);
+    this.setState({ shouldRedirect: true });
+  }
+
   render() {
     const { name, gravatarEmail } = this.props;
     const { shouldRedirect } = this.state;
@@ -41,18 +75,14 @@ class Home extends Component {
 
     return (
       <div className="home">
-        <Link to="/Settings">
-          <div className="config-button">
-            <button data-testid="config-button" />
-          </div>
-        </Link>
+        {buttonSettings()}
         {this.returnInputs()}
         <div>
           <button
             disabled={(name && gravatarEmail) ? '' : 'disabled'}
             data-testid="btn-play"
             className="btn-play"
-            onClick={() => this.setState({ shouldRedirect: true })}
+            onClick={() => this.requisitionsToGame()}
           >
             JOGAR!
           </button>
@@ -64,19 +94,21 @@ class Home extends Component {
 
 const mapStateToProps = ({
   player: { name, gravatarEmail },
-  loadReducer: { isLoading, error, settings } }) => ({
-    name, gravatarEmail, isLoading, error, settings,
+  loadReducer: { isLoading, error, settings, data } }) => ({
+    name, gravatarEmail, isLoading, error, settings, data,
   });
 
 const mapDispatchToProps = (dispatch) => ({
   handleChange: (event) => dispatch(changeUser(event.target)),
-  returnTriviaAPI: (questions) => dispatch(loadQuestions(questions)),
+  returnTriviaAPI: (finalLink) => dispatch(loadQuestions(finalLink)),
 });
 
 Home.propTypes = {
   name: propTypes.string.isRequired,
   gravatarEmail: propTypes.string.isRequired,
   handleChange: propTypes.func.isRequired,
+  settings: propTypes.instanceOf(Object).isRequired,
+  returnTriviaAPI: propTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

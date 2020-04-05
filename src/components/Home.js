@@ -9,10 +9,10 @@ import './style/Home.css';
 export function buttonSettings() {
   return (
     <Link to="/Settings">
-    <div className="config-button">
-      <button data-testid="config-button" />
-    </div>
-  </Link>
+      <div className="config-button">
+        <button data-testid="config-button" />
+      </div>
+    </Link>
   );
 }
 

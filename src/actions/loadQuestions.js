@@ -35,7 +35,7 @@ const loadQuestions = (finalLink) => (
   async (dispatch) => {
     dispatch(apiRequest());
     const token = await getTokenTriviaAPI();
-    finalLink = `${finalLink}&token=${token.token}`;
+    finalLink = (`${finalLink}&token=${token.token}`);
     dispatch(chargeToken(token));
     return (
       getEndPointTrivia(finalLink).then(

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import imageLink from '../service/hashConverter';
+import { buttonSettings } from '../components/Home';
 
 class Header extends Component {
   render() {
@@ -18,11 +19,7 @@ class Header extends Component {
         </div>
         <div className="header-right">
           <p data-testid="header-score">{`Pontos: ${score}`}</p>
-          {configButton && <Link to="/Settings">
-          <div className="config-button">
-            <button data-testid="config-button" />
-          </div>
-        </Link> }
+          {configButton && buttonSettings() }
         </div>
       </header>
     );

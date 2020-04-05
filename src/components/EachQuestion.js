@@ -216,7 +216,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 EachQuestion.propTypes = {
-  pergunta: PropTypes.objectOf(PropTypes.string).isRequired,
+  pergunta: PropTypes.instanceOf(Object).isRequired,
   alteraPlacar: PropTypes.func.isRequired,
   callbackProximaPergunta: PropTypes.func.isRequired,
   callbackFeedback: PropTypes.func.isRequired,

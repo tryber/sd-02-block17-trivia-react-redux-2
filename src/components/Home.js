@@ -4,8 +4,17 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import changeUser from '../actions/changeUser';
 import loadQuestions from '../actions/loadQuestions';
-import getTokenTriviaAPI from '../service/tokenAPI';
 import './style/Home.css';
+
+export function buttonSettings() {
+  return (
+    <Link to="/Settings">
+    <div className="config-button">
+      <button data-testid="config-button" />
+    </div>
+  </Link>
+  );
+}
 
 class Home extends Component {
   constructor(props) {
@@ -66,11 +75,7 @@ class Home extends Component {
 
     return (
       <div className="home">
-        <Link to="/Settings">
-          <div className="config-button">
-            <button data-testid="config-button" />
-          </div>
-        </Link>
+        {buttonSettings()}
         {this.returnInputs()}
         <div>
           <button
@@ -90,7 +95,7 @@ class Home extends Component {
 const mapStateToProps = ({
   player: { name, gravatarEmail },
   loadReducer: { isLoading, error, settings, data } }) => ({
-    name, gravatarEmail, isLoading, error, settings, data
+    name, gravatarEmail, isLoading, error, settings, data,
   });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -103,6 +108,7 @@ Home.propTypes = {
   gravatarEmail: propTypes.string.isRequired,
   handleChange: propTypes.func.isRequired,
   settings: propTypes.instanceOf(Object).isRequired,
+  returnTriviaAPI: propTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

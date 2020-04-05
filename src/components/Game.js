@@ -32,7 +32,7 @@ class Game extends Component {
     const { data, isLoading, response } = this.props;
     const { indexPergunta, shouldRenderNextButton, shouldRedirect } = this.state;
     if (response === 4) {
-      alert('A categoria escolhida não possui perguntas type boolean, você será redirecionado para a tela de configurações');
+      alert('A combinação escolhida nas configurações não retorna nenhuma pergunta da API, você será redirecionado para a tela de configurações');
       return <Redirect to="/settings" />;
     }
     if (isLoading) return (<div><Loading /></div>);
@@ -65,10 +65,13 @@ const mapStateToProps = ({ loadReducer: { data, isLoading, response } }) => ({
 
 Game.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
+  isLoading: PropTypes.bool.isRequired,
+  response: PropTypes.number,
 };
 
 Game.defaultProps = {
   data: [],
+  response: 0,
 };
 
 export default connect(mapStateToProps)(Game);

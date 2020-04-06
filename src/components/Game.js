@@ -37,6 +37,22 @@ class Game extends Component {
     );
   }
 
+  redirect() {
+    const { response, playerClear } = this.props;
+    const { shouldRedirect } = this.state;
+    if (response === 4) {
+      alert('A combinação escolhida nas configurações não retorna nenhuma pergunta da API, você será redirecionado para a tela de configurações');
+      return <Redirect to="/settings" />;
+    }
+
+    if (shouldRedirect) {
+      return <Redirect to="/feedback" />;
+    }
+
+    playerClear();
+    return <Redirect to="/" />;
+  }
+
   renderGame() {
     const { data } = this.props;
     const { indexPergunta, shouldRenderNextButton } = this.state;
@@ -62,22 +78,6 @@ class Game extends Component {
         }
       </div>
     );
-  }
-
-  redirect() {
-    const { response, playerClear } = this.props;
-    const { shouldRedirect } = this.state;
-    if (response === 4) {
-      alert('A combinação escolhida nas configurações não retorna nenhuma pergunta da API, você será redirecionado para a tela de configurações');
-      return <Redirect to="/settings" />;
-    }
-
-    if (shouldRedirect) {
-      return <Redirect to="/feedback" />;
-    }
-
-    playerClear();
-    return <Redirect to="/" />;
   }
 
   renderNextQuestion() {

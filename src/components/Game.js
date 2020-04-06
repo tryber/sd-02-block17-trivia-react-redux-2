@@ -37,13 +37,6 @@ class Game extends Component {
     );
   }
 
-  renderNextQuestion() {
-    this.setState((state) => ({
-      indexPergunta: state.indexPergunta + 1,
-      shouldRenderNextButton: false,
-    }));
-  }
-
   renderGame() {
     const { data } = this.props;
     const { indexPergunta, shouldRenderNextButton } = this.state;
@@ -72,7 +65,7 @@ class Game extends Component {
   }
 
   redirect() {
-    const { response, playerClear, data } = this.props;
+    const { response, playerClear } = this.props;
     const { shouldRedirect } = this.state;
     if (response === 4) {
       alert('A combinação escolhida nas configurações não retorna nenhuma pergunta da API, você será redirecionado para a tela de configurações');
@@ -85,6 +78,13 @@ class Game extends Component {
 
     playerClear();
     return <Redirect to="/" />;
+  }
+
+  renderNextQuestion() {
+    this.setState((state) => ({
+      indexPergunta: state.indexPergunta + 1,
+      shouldRenderNextButton: false,
+    }));
   }
 
   render() {

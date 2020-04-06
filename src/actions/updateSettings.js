@@ -17,6 +17,7 @@ function updateSettingsCategories(settings) {
 const updateSettings = (settings) => (
   (dispatch) => {
     dispatch(updateSettingsCategories(settings));
+    dispatch({ type: 'CLEAR_REQUEST' });
     return dispatch(playerCleanupAction());
   }
 );

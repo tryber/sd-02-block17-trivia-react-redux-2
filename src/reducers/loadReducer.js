@@ -2,14 +2,11 @@ import * as types from '../actions/actionTypes';
 
 const initialState = {
   data: [],
-  dataMock: [],
-  player: [
-    { name: {} },
-  ],
+  response: null,
   token: '',
   isLoading: false,
-  error: '',
-  errorCategory: '',
+  error: null,
+  errorCategory: null,
   settings: {
     category: '',
     difficulty: '',
@@ -51,6 +48,7 @@ function updateSettings(state, action) {
 }
 
 export default function reducer(state = initialState, action) {
+  console.log(state)
   switch (action.type) {
     case types.REQUEST_API:
       return { ...state, isLoading: true };
@@ -66,6 +64,8 @@ export default function reducer(state = initialState, action) {
       return { ...state, errorCategory: action.errorCategory };
     case types.CHANGE_SETTINGS:
       return updateSettings(state, action);
+    case 'CLEAR_REQUEST':
+      return { ...state, data: [], response: null };
     default:
       return state;
   }

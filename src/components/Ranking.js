@@ -14,7 +14,7 @@ class Ranking extends Component {
   const playersRank = scoreRank.map((score) => ranking.find((player) => player.score === score));
   const leaderboard = playersRank.map((player, position) => (
     <div className="ranking-player" key={player}>
-      <img data-testid={`profile-picture-${position}`} src={imageLink(gravatarEmail)} alt="Game Player" />
+      <img data-testid={`profile-picture-${position}`} src={imageLink(gravatarEmail)} alt="Player's gravatar" />
       <h4 data-testid={`${player.name}-${position}`}>{player.name}</h4>-
       <p>{player.score} Pontos</p>
     </div>

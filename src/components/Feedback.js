@@ -21,7 +21,7 @@ class Feedback extends Component {
     rank.push(playerData);
     const playersScore = rank.map((player) => player.score);
     const scoreRank = playersScore.sort((a, b) => b - a);
-    const playersRank = scoreRank.map((score) => rank.find((player) => player.score === score));
+    const playersRank = scoreRank.map((x) => rank.find((player) => player.score === x));
     localStorage.setItem('ranking', JSON.stringify(playersRank));
   }
 
@@ -95,6 +95,8 @@ Feedback.propTypes = {
   assertions: propTypes.number.isRequired,
   clearPlayer: propTypes.func.isRequired,
   limparDadosRequisicao: propTypes.func.isRequired,
+  name: propTypes.string.isRequired,
+  gravatarEmail: propTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feedback);

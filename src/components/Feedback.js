@@ -11,7 +11,18 @@ class Feedback extends Component {
     super(props);
     this.state = { shouldRedirectToRanking: false, shouldRedirectToHome: false };
     this.restartGame = this.restartGame.bind(this);
-    this.rankLocalStorage = this.rankLocalStorage.bind(this);
+    this.redirectRank = this.redirectRank.bind(this);
+  }
+
+  componentDidMount(){
+  const { score, name, gravatarEmail } = this.props;
+  const rank = JSON.parse(localStorage.getItem('ranking')) || [];
+  const playerData = { name, score, picture: imageLink(gravatarEmail) };
+  rank.push(playerData);
+  const playersScore = rank.map((player) => player.score);
+  const scoreRank = playersScore.sort((a, b) => b - a);
+  const playersRank = scoreRank.map((score) => rank.find((player) => player.score === score));
+  localStorage.setItem('ranking', JSON.stringify(playersRank));
   }
 
   restartGame() {
@@ -21,12 +32,7 @@ class Feedback extends Component {
     this.setState({ shouldRedirectToHome: true });
   }
 
-  rankLocalStorage() {
-    const { score, name, gravatarEmail } = this.props;
-    const rank = JSON.parse(localStorage.getItem('ranking')) || [];
-    const playerData = { name, score, picture: imageLink(gravatarEmail) };
-    rank.push(playerData);
-    localStorage.setItem('ranking', JSON.stringify(rank));
+  redirectRank() {
     this.setState({ shouldRedirectToRanking: true });
   }
 
@@ -41,7 +47,7 @@ class Feedback extends Component {
         <p data-testid="feedback-total-score">{`Um total de ${score} pontos`}</p>
         <div className="buttons">
           <button
-            onClick={ this.rankLocalStorage }
+            onClick={ this.redirectRank }
             className="btn-ranking"
           >
             VER RANKING

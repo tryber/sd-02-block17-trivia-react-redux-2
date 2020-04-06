@@ -48,6 +48,7 @@ function updateSettings(state, action) {
 }
 
 export default function reducer(state = initialState, action) {
+  console.log(state)
   switch (action.type) {
     case types.REQUEST_API:
       return { ...state, isLoading: true };

@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './style/Ranking.css';
 
 class Ranking extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       shouldRedirect: false,
-    }
-    this.handleClick=this.handleClick.bind(this);
+    };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
@@ -23,43 +23,44 @@ class Ranking extends Component {
   }
 
   render() {
-  const ranking = JSON.parse(localStorage.getItem('ranking'));
-  const leaderboard = ranking.map((player, position) => (
-    <div className="ranking-player" key={player}>
+    const ranking = JSON.parse(localStorage.getItem('ranking'));
+    const leaderboard = ranking.map((player, position) => (
+    <div className="players" key={player}>
       <img data-testid={`profile-picture-${position}`} src={player.picture} alt="Player's gravatar" />
       <h4 data-testid={`${player.name}-${position}`}>{player.name}</h4>-
       <p>{player.score} Pontos</p>
     </div>
   ));
-  const {shouldRedirect} = this.state;
-  if (shouldRedirect){ return <Redirect to="/" />} 
+    const { shouldRedirect } = this.state;
+    if (shouldRedirect) { return <Redirect to="/" /> };
 
-  return (
-      <div className="ranking-content">
-        <h1 className="title">Ranking</h1>
-        {leaderboard}
-        <button onClick={ this.handleClick } type="button">Jogar Novamente</button>
-      </div>
-    )};
+    return (
+    <div className="rankWrapper">
+      <h1 className="title">Ranking</h1>
+      {leaderboard}
+      <button onClick={this.handleClick} type="button">Jogar Novamente</button>
+    </div>
+    ) 
+  };
 };
 
-const mapStateToProps = ({ player: { name, score, gravatarEmail } }) => ({
+const mapStateToProps = ({ player: { name, score } }) => ({
   name,
   score,
-  gravatarEmail
 });
 
 const mapDispatchToProps = (dispatch) => ({
   clearPlayer: () => dispatch({
-    type: 'CLEAR_USER_DATA'
+    type: 'CLEAR_USER_DATA',
   }),
   clearRequest: () => dispatch({
-    type: 'CLEAR_REQUEST'
-  })
-})
+    type: 'CLEAR_REQUEST',
+  }),
+});
 
 Ranking.propTypes = {
-  gravatarEmail: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Ranking);

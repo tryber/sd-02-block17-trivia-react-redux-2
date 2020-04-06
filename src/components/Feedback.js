@@ -14,15 +14,15 @@ class Feedback extends Component {
     this.redirectRank = this.redirectRank.bind(this);
   }
 
-  componentDidMount(){
-  const { score, name, gravatarEmail } = this.props;
-  const rank = JSON.parse(localStorage.getItem('ranking')) || [];
-  const playerData = { name, score, picture: imageLink(gravatarEmail) };
-  rank.push(playerData);
-  const playersScore = rank.map((player) => player.score);
-  const scoreRank = playersScore.sort((a, b) => b - a);
-  const playersRank = scoreRank.map((score) => rank.find((player) => player.score === score));
-  localStorage.setItem('ranking', JSON.stringify(playersRank));
+  componentDidMount() {
+    const { score, name, gravatarEmail } = this.props;
+    const rank = JSON.parse(localStorage.getItem('ranking')) || [];
+    const playerData = { name, score, picture: imageLink(gravatarEmail) };
+    rank.push(playerData);
+    const playersScore = rank.map((player) => player.score);
+    const scoreRank = playersScore.sort((a, b) => b - a);
+    const playersRank = scoreRank.map((score) => rank.find((player) => player.score === score));
+    localStorage.setItem('ranking', JSON.stringify(playersRank));
   }
 
   restartGame() {
@@ -47,7 +47,7 @@ class Feedback extends Component {
         <p data-testid="feedback-total-score">{`Um total de ${score} pontos`}</p>
         <div className="buttons">
           <button
-            onClick={ this.redirectRank }
+            onClick={this.redirectRank}
             className="btn-ranking"
           >
             VER RANKING

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import propTypes from 'prop-types';
+import imageLink from '../service/hashConverter';
 import Header from './Header';
 import playerCleanupAction from '../actions/playerCleanupAction';
 
@@ -10,6 +11,18 @@ class Feedback extends Component {
     super(props);
     this.state = { shouldRedirectToRanking: false, shouldRedirectToHome: false };
     this.restartGame = this.restartGame.bind(this);
+    this.redirectRank = this.redirectRank.bind(this);
+  }
+
+  componentDidMount() {
+    const { score, name, gravatarEmail } = this.props;
+    const rank = JSON.parse(localStorage.getItem('ranking')) || [];
+    const playerData = { name, score, picture: imageLink(gravatarEmail) };
+    rank.push(playerData);
+    const playersScore = rank.map((player) => player.score);
+    const scoreRank = playersScore.sort((a, b) => b - a);
+    const playersRank = scoreRank.map((x) => rank.find((player) => player.score === x));
+    localStorage.setItem('ranking', JSON.stringify(playersRank));
   }
 
   restartGame() {
@@ -17,6 +30,10 @@ class Feedback extends Component {
     clearPlayer();
     limparDadosRequisicao();
     this.setState({ shouldRedirectToHome: true });
+  }
+
+  redirectRank() {
+    this.setState({ shouldRedirectToRanking: true });
   }
 
   renderSection() {
@@ -30,7 +47,7 @@ class Feedback extends Component {
         <p data-testid="feedback-total-score">{`Um total de ${score} pontos`}</p>
         <div className="buttons">
           <button
-            onClick={() => this.setState({ shouldRedirectToRanking: true })}
+            onClick={this.redirectRank}
             className="btn-ranking"
           >
             VER RANKING
@@ -78,6 +95,8 @@ Feedback.propTypes = {
   assertions: propTypes.number.isRequired,
   clearPlayer: propTypes.func.isRequired,
   limparDadosRequisicao: propTypes.func.isRequired,
+  name: propTypes.string.isRequired,
+  gravatarEmail: propTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feedback);

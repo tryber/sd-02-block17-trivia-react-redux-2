@@ -28,11 +28,13 @@ class Ranking extends Component {
       <div className="players" key={player}>
         <img data-testid={`profile-picture-${position}`} src={player.picture} alt="Player's gravatar" />
         <h4 data-testid={`${player.name}-${position}`}>{player.name}</h4>-
-      <p>{player.score} Pontos</p>
+        <p>{player.score} Pontos</p>
       </div>
-  ));
+    ));
     const { shouldRedirect } = this.state;
-    if (shouldRedirect) { return <Redirect to="/" /> };
+    if (shouldRedirect) {
+      return <Redirect to="/" />
+    };
 
     return (
       <div className="rankWrapper">

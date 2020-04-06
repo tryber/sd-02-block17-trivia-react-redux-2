@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import propTypes from 'prop-types';
+import imageLink from '../service/hashConverter';
 import Header from './Header';
 import playerCleanupAction from '../actions/playerCleanupAction';
 
@@ -23,9 +24,10 @@ class Feedback extends Component {
   rankLocalStorage() {
     const { score, name, gravatarEmail } = this.props;
     const rank = JSON.parse(localStorage.getItem('ranking')) || [];
-    const playerData = { name, score, picture: gravatarEmail };
+    const playerData = { name, score, picture: imageLink(gravatarEmail) };
     rank.push(playerData);
     localStorage.setItem('ranking', JSON.stringify(rank));
+    this.setState({ shouldRedirectToRanking: true });
   }
 
   renderSection() {
@@ -39,7 +41,7 @@ class Feedback extends Component {
         <p data-testid="feedback-total-score">{`Um total de ${score} pontos`}</p>
         <div className="buttons">
           <button
-            onClick={() => this.setState({ shouldRedirectToRanking: true }), this.rankLocalStorage}
+            onClick={ this.rankLocalStorage }
             className="btn-ranking"
           >
             VER RANKING

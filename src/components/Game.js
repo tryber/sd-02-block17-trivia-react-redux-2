@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Loading from './Loading';
 import Header from './Header';
 import EachQuestion from './EachQuestion';
+import playerCleanupAction from '../actions/playerCleanupAction';
 import './style/Game.css';
 
 class Game extends Component {
@@ -36,23 +37,25 @@ class Game extends Component {
     );
   }
 
-  renderNextQuestion() {
-    this.setState((state) => ({
-      indexPergunta: state.indexPergunta + 1,
-      shouldRenderNextButton: false,
-    }));
-  }
-
-  render() {
-    const { data, isLoading, response } = this.props;
-    const { indexPergunta, shouldRenderNextButton, shouldRedirect } = this.state;
+  redirect() {
+    const { response, playerClear } = this.props;
+    const { shouldRedirect } = this.state;
     if (response === 4) {
       alert('A combinação escolhida nas configurações não retorna nenhuma pergunta da API, você será redirecionado para a tela de configurações');
       return <Redirect to="/settings" />;
     }
-    if (isLoading) return (<div><Loading /></div>);
-    if (shouldRedirect) return <Redirect to="/feedback" />;
 
+    if (shouldRedirect) {
+      return <Redirect to="/feedback" />;
+    }
+
+    playerClear();
+    return <Redirect to="/" />;
+  }
+
+  renderGame() {
+    const { data } = this.props;
+    const { indexPergunta, shouldRenderNextButton } = this.state;
     return (
       <div>
         <Header />
@@ -76,10 +79,34 @@ class Game extends Component {
       </div>
     );
   }
+
+  renderNextQuestion() {
+    this.setState((state) => ({
+      indexPergunta: state.indexPergunta + 1,
+      shouldRenderNextButton: false,
+    }));
+  }
+
+  render() {
+    const { isLoading, response, data } = this.props;
+    const { shouldRedirect } = this.state;
+
+    if ((!isLoading && data.length === 0) || response === 3 || response === 4 || shouldRedirect) {
+      return this.redirect();
+    }
+
+    if (isLoading) return (<div><Loading /></div>);
+
+    return this.renderGame();
+  }
 }
 
 const mapStateToProps = ({ loadReducer: { data, isLoading, response, token } }) => ({
   data, isLoading, response, token,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  playerClear: () => dispatch(playerCleanupAction()),
 });
 
 Game.propTypes = {
@@ -87,6 +114,7 @@ Game.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   response: PropTypes.number,
   token: PropTypes.string.isRequired,
+  playerClear: PropTypes.func.isRequired,
 };
 
 Game.defaultProps = {
@@ -94,4 +122,4 @@ Game.defaultProps = {
   response: 0,
 };
 
-export default connect(mapStateToProps)(Game);
+export default connect(mapStateToProps, mapDispatchToProps)(Game);

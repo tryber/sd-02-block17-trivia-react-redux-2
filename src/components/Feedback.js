@@ -14,8 +14,9 @@ class Feedback extends Component {
   }
 
   restartGame() {
-    const { clearPlayer } = this.props;
+    const { clearPlayer, limparDadosRequisicao } = this.props;
     clearPlayer();
+    limparDadosRequisicao();
     this.setState({ shouldRedirectToHome: true });
   }
 
@@ -78,12 +79,14 @@ const mapStateToProps = ({ player: { gravatarEmail, name, score, assertions } })
 
 const mapDispatchToProps = (dispatch) => ({
   clearPlayer: () => dispatch(playerCleanupAction()),
+  limparDadosRequisicao: () => dispatch({ type: 'CLEAR_REQUEST' }),
 });
 
 Feedback.propTypes = {
   score: propTypes.number.isRequired,
   assertions: propTypes.number.isRequired,
   clearPlayer: propTypes.func.isRequired,
+  limparDadosRequisicao: propTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feedback);

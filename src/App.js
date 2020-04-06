@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { player, response } = this.props;
+    const { player } = this.props;
     if (prevProps.player !== player) {
       localStorage.setItem('player', JSON.stringify(player));
     }

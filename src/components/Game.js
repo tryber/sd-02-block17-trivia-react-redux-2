@@ -44,20 +44,9 @@ class Game extends Component {
     }));
   }
 
-  render() {
-    const { data, isLoading, response, playerClear } = this.props;
-    const { indexPergunta, shouldRenderNextButton, shouldRedirect } = this.state;
-    if (response === 4) {
-      alert('A combinação escolhida nas configurações não retorna nenhuma pergunta da API, você será redirecionado para a tela de configurações');
-      return <Redirect to="/settings" />;
-    }
-    if (response === 3) {
-      playerClear();
-      return <Redirect to="/" />;
-    }
-    if (isLoading) return (<div><Loading /></div>);
-    if (shouldRedirect) return <Redirect to="/feedback" />;
-
+  renderGame() {
+    const { data } = this.props;
+    const { indexPergunta, shouldRenderNextButton } = this.state;
     return (
       <div>
         <Header />
@@ -81,6 +70,35 @@ class Game extends Component {
       </div>
     );
   }
+
+  redirect() {
+    const { response, playerClear, data } = this.props;
+    const { shouldRedirect } = this.state;
+    if (response === 4) {
+      alert('A combinação escolhida nas configurações não retorna nenhuma pergunta da API, você será redirecionado para a tela de configurações');
+      return <Redirect to="/settings" />;
+    }
+
+    if (shouldRedirect) {
+      return <Redirect to="/feedback" />;
+    }
+
+    playerClear();
+    return <Redirect to="/" />;
+  }
+
+  render() {
+    const { isLoading, response, data } = this.props;
+    const { shouldRedirect } = this.state;
+
+    if ((!isLoading && data.length === 0) || response === 3 || response === 4 || shouldRedirect) {
+      return this.redirect();
+    }
+
+    if (isLoading) return (<div><Loading /></div>);
+
+    return this.renderGame();
+  }
 }
 
 const mapStateToProps = ({ loadReducer: { data, isLoading, response, token } }) => ({
@@ -96,6 +114,7 @@ Game.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   response: PropTypes.number,
   token: PropTypes.string.isRequired,
+  playerClear: PropTypes.func.isRequired,
 };
 
 Game.defaultProps = {

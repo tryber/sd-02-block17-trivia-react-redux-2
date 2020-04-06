@@ -26,20 +26,20 @@ class Ranking extends Component {
     const ranking = JSON.parse(localStorage.getItem('ranking'));
     const leaderboard = ranking.map((player, position) => (
       <div className="players" key={player}>
-      <img data-testid={`profile-picture-${position}`} src={player.picture} alt="Player's gravatar" />
-      <h4 data-testid={`${player.name}-${position}`}>{player.name}</h4>-
+        <img data-testid={`profile-picture-${position}`} src={player.picture} alt="Player's gravatar" />
+        <h4 data-testid={`${player.name}-${position}`}>{player.name}</h4>-
       <p>{player.score} Pontos</p>
-    </div>
+      </div>
   ));
     const { shouldRedirect } = this.state;
-    if (shouldRedirect) { return <Redirect to="/" /> }
+    if (shouldRedirect) { return <Redirect to="/" /> };
 
     return (
       <div className="rankWrapper">
-      <h1 className="title">Ranking</h1>
-      {leaderboard}
-      <button onClick={this.handleClick} type="button">Jogar Novamente</button>
-    </div>
+        <h1 className="title">Ranking</h1>
+        {leaderboard}
+        <button onClick={this.handleClick} type="button">Jogar Novamente</button>
+      </div>
     );
   }
 }

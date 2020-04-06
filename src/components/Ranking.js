@@ -33,8 +33,8 @@ class Ranking extends Component {
     ));
     const { shouldRedirect } = this.state;
     if (shouldRedirect) {
-      return <Redirect to="/" />
-    };
+      return <Redirect to="/" />;
+    }
 
     return (
       <div className="rankWrapper">
